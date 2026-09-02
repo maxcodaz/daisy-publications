@@ -16,7 +16,7 @@ On 2 September 2026 this returned **24,763 works**, under the 50,000 cap. Adding
 
 ## Click path (VOSviewer 1.6.21)
 
-File > Create > **Create a map based on bibliographic data** > **Download data through API** > **OpenAlex** > API request URL (paste, key if asked) > Next > type of analysis **Co-occurrence**, unit of analysis **Topics** (added for OpenAlex in 1.6.21, replacing the deprecated concepts; if your build lists only **Keywords** under co-occurrence, use Keywords), **Full counting** > minimum number of occurrences of a topic **10** (OpenAlex has about 4,500 topics; expect a few hundred to qualify) > cap the selection at 200 topics for legibility > Finish. Overlay by **Avg. pub. year** or **Avg. norm. citations**.
+File > Create > **Create a map based on bibliographic data** > **Download data through API** > **OpenAlex** > API request URL (paste, API key as in map 1) > Next > type of analysis **Co-occurrence**, unit of analysis **Topics** (added for OpenAlex in 1.6.21, replacing the deprecated concepts; if your build lists only **Keywords** under co-occurrence, use Keywords), **Full counting** > minimum number of occurrences of a topic **10** (OpenAlex has about 4,500 topics; expect a few hundred to qualify) > cap the selection at 200 topics for legibility > Finish. Overlay by **Avg. pub. year** or **Avg. norm. citations**.
 
 ## How to read the map
 

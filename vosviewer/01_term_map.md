@@ -20,7 +20,7 @@ VOSviewer reads only the `search` and `filter` parameters of the URL and handles
 2. Choose type of data: **Create a map based on text data**. Next.
 3. Choose data source: **Download data through API**. Next.
 4. Choose API: **OpenAlex**. Next.
-5. Choose the **API request URL** option and paste the URL above. If a field for an OpenAlex API key is shown, paste your free key (openalex.org/settings/api).
+5. Choose the **API request URL** option and paste the URL above, and paste your free API key (openalex.org/settings/api) in the **API key** field of the download step (present in VOSviewer 1.6.21; older builds lack it). Without a key the download runs on the shared keyless allowance of $0.10 per day, and a title-search query of this size will not finish on it.
 6. Next: the download runs (about 150 pages of 100 works).
 7. Choose fields: **Title and abstract fields**; tick **Ignore structured abstract labels** and **Ignore copyright statements**.
 8. Counting method: **Binary counting** (a term counts once per document, so long abstracts do not dominate).

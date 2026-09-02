@@ -12,7 +12,7 @@ OpenAlex (openalex.org) is the open catalogue of about 250 million scholarly wor
 
 VOSviewer builds and draws bibliometric maps and can download data from OpenAlex directly. Download version 1.6.21 (12 June 2026) from **vosviewer.com/download**: there is a Windows build, a macOS build, and a plain JAR for other systems. It needs Java 8 or later, which is not bundled: if you do not have Java, install it from java.com or adoptium.net first. Unzip the download into a new folder and start `VOSviewer.exe` (Windows) or the VOSviewer app (macOS; if macOS refuses to open an app from an unidentified developer, right-click the app and choose Open). To check that everything works: File tab > **Create** > "Create a map based on bibliographic data" > **Download data through API** > **OpenAlex** > choose the request-URL option and paste
 `https://api.openalex.org/works?filter=authorships.author.id:A5073659024,primary_location.source.type:journal`
-then Next until the co-authorship map appears (about 115 works, a few seconds). If VOSviewer shows a field for an OpenAlex API key, paste yours there.
+then Next until the co-authorship map appears (about 115 works, a few seconds). In the download step, paste your OpenAlex API key in the **API key** field (present since VOSviewer 1.6.21; make sure you are not on an older build, which has no key support and falls back to a shared keyless allowance too small for the bigger queries).
 
 ## 3. Google account and a BigQuery sandbox (4 minutes, no credit card)
 

@@ -32,7 +32,7 @@ These numbers match the "documents" weight VOSviewer shows per country under ful
 2. Choose type of data: **Create a map based on bibliographic data**. Next.
 3. Choose data source: **Download data through API**. Next.
 4. Choose API: **OpenAlex**. Next.
-5. Choose the **API request URL** option and paste the URL above (key as in map 1, if asked).
+5. Choose the **API request URL** option and paste the URL above (API key as in map 1).
 6. Next: the download of about 27,000 works runs.
 7. Type of analysis **Co-authorship**; unit of analysis **Countries**; counting method **Full counting**. With full counting a paper with authors from four countries creates links of strength 1 between every pair; fractional counting gives each of the n links 1/n and tames the large multi-country consortia typical of climate science. Run full counting first, then repeat with fractional as a one-click robustness check.
 8. Thresholds: minimum number of documents of a country **20**; minimum citations 0. Expect roughly 60 to 70 countries to qualify.
