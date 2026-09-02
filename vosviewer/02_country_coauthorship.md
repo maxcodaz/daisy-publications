@@ -43,7 +43,7 @@ In one line: bibliographic data; OpenAlex; request URL; co-authorship; countries
 
 ## How to read the map
 
-The US, China, the UK and Germany are the largest circles with the thickest links. The European block usually forms one or two clusters, with the UK bridging to the US. Italy (rank 6 of 169, 922 works) sits in the middle of the core: hover on the node to see its strongest partners, and check its overlay colour against the field average. Countries of the Global South appear at the edge; with full counting their position depends on a few large consortia, and with fractional counting they shrink.
+The US, China, the UK and Germany are the largest circles, and the single thickest link is UK–US, well ahead of China–US. The clusters are collaboration blocks shaped by language and history rather than plain geography: the UK sits with North-Western Europe, the US with Iberia and Latin America, France with Asia-Pacific and francophone Africa, China with Hong Kong, Singapore and Macao, and Italy anchors a Mediterranean and Eastern European cluster. Italy (rank 6, 922 works in the 2 Sept 2026 build) has the UK, the US, France, Germany and the Netherlands as strongest partners, and an average normalised citation score well above the mean of the set. Countries of the Global South appear at the edge; with full counting their position depends on a few large consortia, and with fractional counting they shrink. Treat the cluster membership of mid-core countries as an artifact of the clustering resolution; the robust part of the picture is distances and link thicknesses.
 
 ## Caveats
 
