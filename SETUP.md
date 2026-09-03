@@ -6,7 +6,13 @@ Dear participants, the session on publication data (OpenAlex, VOSviewer, BigQuer
 
 ## 1. OpenAlex account and free API key (2 minutes)
 
-OpenAlex (openalex.org) is the open catalogue of about 250 million scholarly works we will use in all three parts. Since February 2026 an API key is needed for anything beyond a few test calls. Create a free account on openalex.org, then go to **openalex.org/settings/api** and create a key. The free tier gives $1 of credit per day; a list or filter query costs $0.0001 and a search query $0.001, so a full rerun of our notebooks costs well under one cent. Keep the key private (it is tied to your account) and paste it where the notebooks say `API_KEY = "..."`. Requests without a key still work at $0.10 per day, enough to try one URL in a browser.
+OpenAlex (openalex.org) is the open catalogue of about 250 million scholarly works we will use in all three parts. Since February 2026 an API key is needed for anything beyond a few test calls, and you will need one to rebuild the maps and rerun the notebooks. Getting it takes two minutes:
+
+1. Go to **openalex.org**, create a free account (sign up with your email and confirm it).
+2. Open **openalex.org/settings/api** while logged in and create your API key. Copy it into a text file you can find again; treat it like a password, since it is tied to your account.
+3. Where to paste it, depending on the tool: in **VOSviewer**, the API key field of the download-through-API step; in the **notebooks**, the cell that says `API_KEY = "..."`; in a **browser**, append `&api_key=YOUR_KEY` to the query URL.
+
+The free tier gives $1 of credit per day, and the prices make it hard to spend: a list or filter query costs $0.0001 per page and a text search query $0.001 per page, so downloading a full 15,000-work map costs about $0.15 and a full rerun of our notebooks well under one cent. Requests without a key still work on $0.10 per day of shared credit, but that allowance is shared by everyone behind the same network address, so on a classroom Wi-Fi it evaporates: get the key.
 
 ## 2. VOSviewer 1.6.21 (3 minutes)
 

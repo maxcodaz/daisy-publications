@@ -48,6 +48,15 @@ Five copy-paste exercises to rerun after the session with VOSviewer 1.6.21 (vosv
 - Map: bibliographic data > co-authorship > unit **Authors** > full counting > "Ignore documents with a large number of authors" on (default 25; UniTo has physics and medicine consortia with hundreds of authors) > minimum documents of an author 10 > minimum citations 0 > keep the largest connected component when asked.
 - Try: unit **Organizations** (UniTo's partners), then **Countries**; fractional counting; overlay by Avg. norm. citations. Then take the same URL to the API notebook (`group_by=authorships.institutions.id`) and to BigQuery (`UNNEST(authorships)`), the point of the session being that the three tools answer the same question.
 
+## 6. Bibliographic coupling of the twin-transition literature
+
+- Question: is "twin transition" one research conversation, or two strands (green and digital) sharing a label? Papers that cite the same references work on the same problem; if the corpus splits into clusters with distinct reference bases, the label bundles separate conversations.
+- Filters: title contains "twin transition", all years (the phrase barely exists before 2020).
+- URL: `https://api.openalex.org/works?filter=title.search:twin%20transition`
+- Count: 1,214 works (3 Sept 2026), a small corpus that downloads in seconds.
+- Map: bibliographic data > **bibliographic coupling** > unit **Documents** > full counting > minimum citations of a document 0 (the corpus is young) > keep the documents with the largest total link strength; then overlay by Avg. pub. year.
+- Try: `title_and_abstract.search:twin%20transition` widens the net to 7,856 works; compare the cluster structure. Then take the same question to the API leg: `group_by=primary_topic.field.id` shows which disciplines the label lives in.
+
 ## Two more routes worth knowing
 
 - **DOI file**: any text file with DOIs in it (a Stata export, a Scopus CSV, a reference list) can be given to VOSviewer, which downloads the OpenAlex records for those DOIs and builds any of the maps above. Useful when your sample was built elsewhere.
