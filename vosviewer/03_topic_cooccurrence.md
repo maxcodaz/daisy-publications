@@ -12,7 +12,7 @@ Which research topics travel together in Italian climate-action (SDG 13) publica
 https://api.openalex.org/works?filter=authorships.countries:IT,sustainable_development_goals.id:https://openalex.org/sdgs/13,publication_year:2020-2025
 ```
 
-On 2 September 2026 this returned **24,763 works** (24,773 on 6 September), under the 50,000 cap. Adding `type:article` shrinks it further if needed. The filters are plain (no text search), so the download is billed at the cheap list rate.
+In September 2026 this returned about **24,800 works**, under the 50,000 cap. Adding `type:article` shrinks it further if needed. The filters are plain (no text search), so the download is billed at the cheap list rate.
 
 ## Click path (VOSviewer 1.6.21)
 
@@ -28,7 +28,7 @@ On 2 September 2026 this returned **24,763 works** (24,773 on 6 September), unde
 
 In one line: bibliographic data; OpenAlex; request URL; co-occurrence; topics; full counting; min. occurrences 100; overlay by average normalised citations.
 
-## How to read the map (3 September 2026 build, 126 topics, 11 clusters)
+## How to read the map (September 2026 build, 126 topics, 11 clusters)
 
 Node size is the number of works carrying the topic (34,361 topic assignments over the 126 topics), a link is co-assignment to the same work. The two largest nodes are **climate variability and models** (1,832 works) and **meteorological phenomena and simulations** (1,338), which also form the strongest link of the map (902); then **flood risk assessment and management** (1,124), **landslides and related hazards** (1,044), cryospheric studies (992), atmospheric gas dynamics (828) and **climate change policy and economics** (727).
 
@@ -50,3 +50,7 @@ Seismology and disaster engineering are the least-cited regions (0.68 and 0.97 o
 ## Caveat
 
 SDG tags are classifier output, and the big bibliometric databases disagree on them (Kashnitsky et al. 2024, *Quantitative Science Studies*; Ottaviani and Stahlschmidt 2024, arXiv:2405.03007, both in [../readings/](../readings/)). The map shows what OpenAlex calls SDG 13, not a ground truth: a whole cluster of astrophysics, planetary and particle physics inside "Italian climate action" (about a tenth of the topic assignments on the map) is the classification boundary made visible.
+
+## Saved map
+
+[maps/A3_IT_sdg13_topics_2020_2025.json](maps/A3_IT_sdg13_topics_2020_2025.json) is the map described above. Download it and open it in VOSviewer (File > Open > VOSviewer JSON file) or in VOSviewer Online (app.vosviewer.com > Open).

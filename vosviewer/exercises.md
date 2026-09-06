@@ -1,6 +1,6 @@
 # Take-home sheet: six VOSviewer + OpenAlex exercises
 
-Six copy-paste exercises to rerun after the session with VOSviewer 1.6.21 (vosviewer.com/download, Java 8 or later) and the OpenAlex API. They come from the ICE PhD course "Economics of Science", class 4 (slides 21 to 25), with the year filters moved to 2019 to 2025 and one syntax fix. For each: File > Create > choose bibliographic or text data > Download data through API > OpenAlex > paste the request URL. VOSviewer reads only the `search` and `filter` parts of the URL; `page`, `sort` and `per_page` are ignored, so the URLs below carry only the filter. Every URL returns at most 50,000 works, the ceiling of the OpenAlex route. Counts were read from the API on 2 Sept 2026 with keyless calls (`per_page=1`, `meta.count`); they grow a little every week. VOSviewer 1.6.21 has an API key field in the download step: paste the free key from openalex.org/settings/api (see the setup guide). Without it you run on $0.10 per day of keyless credit, which is not enough for exercise 3 (search queries cost ten times a plain filter).
+Six copy-paste exercises to rerun after the session with VOSviewer 1.6.21 (vosviewer.com/download, Java 8 or later) and the OpenAlex API. They come from the ICE PhD course "Economics of Science", class 4 (slides 21 to 25), with the year filters moved to 2019 to 2025 and one syntax fix. For each: File > Create > choose bibliographic or text data > Download data through API > OpenAlex > paste the request URL. VOSviewer reads only the `search` and `filter` parts of the URL; `page`, `sort` and `per_page` are ignored, so the URLs below carry only the filter. Every URL returns at most 50,000 works, the ceiling of the OpenAlex route. Counts were read from the API in September 2026 with keyless calls (`per_page=1`, `meta.count`); they grow a little every week. VOSviewer 1.6.21 has an API key field in the download step: paste the free key from openalex.org/settings/api (see the setup guide). Without it you run on $0.10 per day of keyless credit, which is not enough for exercise 3 (search queries cost ten times a plain filter).
 
 ## 1. Co-authorship network of one researcher
 
@@ -25,7 +25,7 @@ Six copy-paste exercises to rerun after the session with VOSviewer 1.6.21 (vosvi
 - Question: what vocabulary structures a literature, and how does it drift over time?
 - Filters: title contains "circular economy"; years 2019 to 2025 (class 4 had 2016 to 2022 and no URL on the slide; this is the reconstructed URL, refreshed).
 - URL: `https://api.openalex.org/works?filter=title.search:circular%20economy,publication_year:2019-2025`
-- Count: 23,979 works (all types; 24,039 on 18 Aug, counts can also fall a little when OpenAlex merges records). The article-only version used in the DAISY demo, `title.search:circular%20economy,type:article,publication_year:2016-2025`, gives 15,330.
+- Count: 23,979 works (all types; counts move a little as OpenAlex adds and merges records). The article-only version used in the DAISY demo, `title.search:circular%20economy,type:article,publication_year:2016-2025`, gives 15,330.
 - Map: **text data** > OpenAlex > request URL > title and abstract fields > ignore structured abstract labels and copyright statements > **binary counting** > minimum occurrences 20 to 30 > 60% most relevant terms > untick generic terms > overlay by Avg. pub. year.
 - Try: `title.search` vs `title_and_abstract.search` vs `default.search` (the last searches title, abstract and full text where available); the counts differ a lot, the map less than you would think. Try a thesaurus file to merge "circular economy" and "circular economies".
 
@@ -35,7 +35,7 @@ Six copy-paste exercises to rerun after the session with VOSviewer 1.6.21 (vosvi
 - Filters: works with at least one author at UniTo (`I55143463`, lineage, so departments and hospitals count) **and** at least one at PoliTo (`I177477856`); years 2019 to 2025.
 - URL: `https://api.openalex.org/works?filter=authorships.institutions.lineage:I55143463,authorships.institutions.lineage:I177477856,publication_year:2019-2025`
 - Count: 1,650 works (3,673 without the year filter).
-- Syntax fix, please read: the class-4 URL wrote the AND as `authorships.institutions.lineage:I55143463+I177477856`. On 2 Sept 2026 that URL returned 134,340 works, which is the count for UniTo alone (the second id is dropped), and 52,364 for 2019 to 2025, above the 50,000 cap. Repeating the filter key, as in the URL above, gives the intersection. If you copy a URL from an old slide, check `meta.count` in a browser first.
+- Syntax fix, please read: the class-4 URL wrote the AND as `authorships.institutions.lineage:I55143463+I177477856`. In September 2026 that URL returned 134,340 works, which is the count for UniTo alone (the second id is dropped), and 52,364 for 2019 to 2025, above the 50,000 cap. Repeating the filter key, as in the URL above, gives the intersection. If you copy a URL from an old slide, check `meta.count` in a browser first.
 - Map: bibliographic data > co-occurrence > unit **Topics** (or Keywords) > full counting > minimum occurrences 5 > overlay by Avg. pub. year.
 - Try: swap the two ids for your own university and its main partner; try `authorships.institutions.lineage:I55143463|I177477856` (OR) to see the union instead (add years or `type:article` to stay under the cap).
 
@@ -53,7 +53,7 @@ Six copy-paste exercises to rerun after the session with VOSviewer 1.6.21 (vosvi
 - Question: is "twin transition" one research conversation, or two strands (green and digital) sharing a label? Papers that cite the same references work on the same problem; if the corpus splits into clusters with distinct reference bases, the label bundles separate conversations.
 - Filters: title contains "twin transition", all years (the phrase barely exists before 2020).
 - URL: `https://api.openalex.org/works?filter=title.search:twin%20transition`
-- Count: 1,214 works (3 Sept 2026), a small corpus that downloads in seconds.
+- Count: 1,214 works (September 2026), a small corpus that downloads in seconds.
 - Map: bibliographic data > **bibliographic coupling** > unit **Documents** > full counting > minimum citations of a document 0 (the corpus is young) > keep the documents with the largest total link strength; then overlay by Avg. pub. year.
 - Try: `title_and_abstract.search:twin%20transition` widens the net to 7,856 works; compare the cluster structure. Then take the same question to the API leg: `group_by=primary_topic.field.id` shows which disciplines the label lives in.
 
@@ -62,7 +62,7 @@ Six copy-paste exercises to rerun after the session with VOSviewer 1.6.21 (vosvi
 - **DOI file**: any text file with DOIs in it (a Stata export, a Scopus CSV, a reference list) can be given to VOSviewer, which downloads the OpenAlex records for those DOIs and builds any of the maps above. Useful when your sample was built elsewhere.
 - **JSON file**: call the API yourself (pyalex, openalexR, curl), save the JSON, and give the file to VOSviewer. Useful for reproducibility (the exact data behind the map are on disk) and for queries the URL route cannot express.
 
-## Counts on 2 Sept 2026 (for your own check)
+## Counts in September 2026 (for your own check)
 
 | ex. | filter | works |
 |---|---|---|
