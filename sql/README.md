@@ -7,28 +7,29 @@ BigQuery Standard SQL scripts for the third leg of the live demo ("same question
 | file | step | what it does | tables read |
 |---|---|---|---|
 | `q00_schema.sql` | C1 | schema of `works` (INFORMATION_SCHEMA, free), row counts and bytes (`__TABLES__`, free), the xpac/core split, a 5-row preview with SQL (to show that LIMIT does not reduce bytes), the "SELECT *" sin | `subugoe-collaborative.openalex_walden.works` |
+| `q00a_warmup.sql` | C1 | four warm-up statements run live before the real scripts, one clause at a time: COUNT(*) (free), filter + column choice (with the commented `display_name` line for the estimate demo), renames/dummy/sort, GROUP BY year | same |
 | `q01_green_by_year.sql` | C2 | CE articles vs all articles by year 2000 to 2025, share; commented variant counting any topic (`topics[]`) instead of the primary one | same |
-| `q02_green_by_country.sql` | C2 | CE articles 2015 to 2025 by author country, whole and fractional counting, top 20 plus Italy, RTA | same |
-| `q03_patcit_green.sql` | C3 | CE articles 2000 to 2016 joined to PatCit front-page citations on DOI: share cited by patents and citing patents per cited article, by year and by subfield; citing office; lag in years; commented Reliance on Science alternative on `nber-i3` | same + `patcit-public-data.frontpage.bibliographical_reference` |
-| `q04_export_examples.sql` | C4 | create the `daisy` dataset, materialise q01 as a table, export to CSV, Colab `%%bigquery` and R `bigrquery` snippets, pitfalls | same |
+| `q02_green_by_country.sql` | C2 | CE articles 2015 to 2025 by author country, full and fractional counting, top 20, RTA; step 0 creates the `daisy` dataset and the `ce_topics.csv` upload replaces the inline topic list | same + the uploaded `daisy.ce_topics` |
+| `q03_patcit_green.sql` | C3 | CE articles 2000 to 2016 joined to PatCit front-page citations on DOI: share cited by patents and citing patents per cited article, by year and by subfield; citing office; lag in years; block 7 = the export notes shown live | same + `patcit-public-data.frontpage.bibliographical_reference` |
+| `q04_export_examples.sql` | take-home | optional reference, not run live: materialise, Save results, EXPORT DATA, Colab `%%bigquery` and R `bigrquery` snippets, pitfalls | same |
 
-The CE topic set is inlined in every script as a `WITH green AS (SELECT id FROM UNNEST([...]))` block, so nothing has to be uploaded. The 28 ids in the scripts were pasted on 18 Aug 2026 from `..\data\ce_topic_ids_sql.txt` (the `daisy_group = circular_economy` rows of `..\data\green_topics.csv`), each with its topic name as a trailing comment. If the list changes, rerun `..\_build\paste_ce_ids.py` (it rewrites the block in `q01` to `q04`, including the commented variants) or paste by hand. API cross-check for this set (keyless call, 18 Aug 2026, corpus=core, type:article): 772,022 articles 2000 to 2025.
+The CE topic set is the 8 topics returned by the OpenAlex topics search for "circular economy", frozen on 3 Sept 2026 in `..\data\ce_topic_ids.txt` (the update note in `..\data\README.md` records the reasoning and the older 28-topic set this replaced). It enters the scripts twice, on purpose: `q01` and `q03` inline it as a `WITH green AS (SELECT id FROM UNNEST([...]))` block so they run anywhere, while `q02` reads it from `daisy.ce_topics`, the table students create by uploading the handout file `..\data\ce_topics.csv` (that upload is itself part of the demo). If the list changes, rerun `..\_build\paste_ce_ids.py` (it rewrites the `UNNEST([...])` blocks, commented variants included), regenerate `ce_topics.csv`, and re-upload. API cross-check for this set (keyless call, 4 Sept 2026, corpus=core, type:article): 217,169 articles 2000 to 2025.
 
 ## How to run
 
 1. Sign in to console.cloud.google.com with any Google account. Without a billing account BigQuery runs in **sandbox** mode: no card, 10 GB of storage, tables expire after 60 days, 1 TiB of query processing per month free, and you can query public datasets in other projects.
 2. Nothing has to be starred or added to your project: every script names its tables in full (`subugoe-collaborative.openalex_walden.works`, `patcit-public-data.frontpage...`, `nber-i3...`) and BigQuery resolves them from any project.
 3. Open a script, paste it in the editor, and read the validator line at the top right: "This query will process X GB when run". That dry-run estimate is free and is the number to compare with the header of each script. If the estimate is far above the header value, stop and look for a `SELECT *` or a missing filter.
-4. Run order: `q00` (blocks a1 to a4 are free or almost free; block b costs real bytes, decide whether to run it or only show its estimate), then `q01`, `q02`, `q04` step 0 (creates the `daisy` dataset; needed before `q03` step 1 and `q04` step 1), `q03`, `q04`.
+4. Run order: `q00a` (the four live warm-up statements), `q01`, `q02` (its step 0 creates the `daisy` dataset, then upload `ce_topics.csv`, then the query), `q03` (block 0 first, then blocks 1 to 5; the export is shown on its saved pairs table, block 7). `q00` is reference material; `q04` is take-home only.
 5. Multi-statement files: the console runs the statements one after the other and shows one result tab per statement. To run a single block, select it with the mouse and press Ctrl+Enter (or Cmd+Enter).
 6. Rerun the exact same text within 24 hours and BigQuery answers from cache for free (the job page says "cached"). Rehearsal runs therefore make the live runs instant.
-7. Students in a sandbox: replace `arboreal-avatar-477416-i4` by your own project id wherever a table is created; everything else runs unchanged.
+7. `q02`, `q03` and `q04` create tables and ship with the placeholder `your-project-id`: replace it everywhere (Ctrl+H) by your own project id (shown in the console's project picker) before running; everything else runs unchanged.
 
-Dataset locations: BigQuery cannot join or copy across regions. Before the demo check the "Data location" of `subugoe-collaborative.openalex_walden`, `patcit-public-data.frontpage` and (if used) `nber-i3.openalex` in the console Details tab, and create the `daisy` dataset in the same location (`q04` step 0). If `subugoe-collaborative` and `patcit-public-data` sit in different regions, `q03` must run on `nber-i3` (see below).
+Dataset locations: BigQuery cannot join or copy across regions. Before the demo check the "Data location" of `subugoe-collaborative.openalex_walden` and `patcit-public-data.frontpage` in the console Details tab, and create the `daisy` dataset in the same location (`q02` step 0). If `subugoe-collaborative` and `patcit-public-data` sit in different regions, `q03` cannot join them and C3 falls back to the deck's backup screenshots (the Reliance on Science route on `nber-i3` is described below).
 
 ## Alternative tables on `nber-i3`
 
-`nber-i3` is the i3 BigQuery workspace (Marx & Shvadron 2025); no request form and no starring needed. One caveat: the i3 user guide (https://i3open.org/bigquery.html, June 2026, checked 18 Aug 2026) lists a Google Cloud account with billing enabled as a prerequisite, so whether a card-free sandbox project can query `nber-i3` is a rehearsal check; `subugoe-collaborative` and `patcit-public-data` are the sandbox path. Every script has a "SWITCH TO nber-i3" line in its header.
+`nber-i3` is the i3 BigQuery workspace (Marx & Shvadron 2025); no request form and no starring needed. One caveat: the i3 user guide (https://i3open.org/bigquery.html, June 2026, checked 18 Aug 2026) lists a Google Cloud account with billing enabled as a prerequisite, so whether a card-free sandbox project can query `nber-i3` is a rehearsal check; `subugoe-collaborative` and `patcit-public-data` are the sandbox path. The shipped scripts no longer carry the switch inline; this table is the map for anyone who wants it.
 
 | purpose | subugoe-collaborative (default) | nber-i3 (fallback) |
 |---|---|---|
@@ -45,18 +46,19 @@ Dataset locations: BigQuery cannot join or copy across regions. Before the demo 
 - BigQuery is columnar: cost depends on the leaves you read, not on the number of rows returned. `authorships.countries` is much cheaper than `authorships`.
 - Budget for the whole demo: the plan requires all `q0X` scripts together to stay under 500 GB so a sandbox rerun fits in the free TiB. TODO confirm at rehearsal from the recorded estimates.
 
-## TODO at rehearsal (record the values in the script headers)
+## TODO at rehearsal (record the values here; the student files stay clean)
 
 - [ ] `q00` a3: `row_count` and `size_bytes` of `works` (expect 510,372,821 rows); a4: xpac / core / NULL counts (if `is_xpac` is ever NULL, switch every `NOT is_xpac` to `NOT IFNULL(is_xpac, FALSE)`).
 - [ ] `q00` b: bytes estimate of the LIMIT 5 preview; decide whether to run it live or only show the estimate. Check in the Details tab whether `works` is partitioned or clustered.
 - [ ] `q00` c: the "SELECT *" estimate (should equal size_bytes).
-- [ ] `q01`: bytes, runtime; compare the 2000 to 2025 total with the API cross-check for the same 28 topics (772,022 articles, corpus=core, keyless call of 18 Aug 2026; 11,178 in 2000, 33,711 in 2015, 64,787 in 2025) and with the leg B1 numbers; bytes of the commented `topics[]` variant.
-- [ ] `q02`: bytes, runtime; check that `1 / countries_distinct_count` gives the same fractional totals as the CTE; note Italy's rank and RTA for the slide.
+- [ ] `q00a`: bytes and runtime of blocks 2 to 4 from a fresh session (block 1 is free), plus the estimate of the `display_name` variant of block 2 (the punchline).
+- [ ] `q01`: bytes, runtime; compare the 2000 to 2025 total with the API cross-check for the same 8 topics (217,169 articles, corpus=core, keyless call of 4 Sept 2026; 3,147 in 2000, 9,725 in 2015, 17,915 in 2025) and with the leg B1 numbers; bytes of the commented `topics[]` variant.
+- [ ] `q02`: run step 0 and the `ce_topics.csv` upload once from a throwaway account (auto-detect must give `topic_id_url STRING, topic_name STRING`); bytes, runtime; check that `1 / countries_distinct_count` gives the same fractional totals as the CTE; confirm Italy is inside the top 20 (the final `LIMIT 20` relies on it, there is no rank filter any more); note Italy's rank and RTA for the slide.
 - [ ] `q03` block 0: `patcit-public-data` still answers; format of `cited_by.publication_date` (expected INT64 YYYYMMDD; the SUBSTR cast handles YYYYMMDD and bare years). Block 1: bytes, runtime, rows. Block 2: DOI match rate (share of CE articles with at least one citing patent) and the 2016 drop. Block 6: fill five known CE DOIs and confirm they match.
-- [ ] Data locations of `subugoe-collaborative.openalex_walden`, `patcit-public-data.frontpage`, `nber-i3.openalex`; set `location` in `q04` step 0 accordingly.
+- [ ] Data locations of `subugoe-collaborative.openalex_walden` and `patcit-public-data.frontpage`; set `location` in `q02` step 0 accordingly.
 - [ ] `nber-i3.openalex.works_20260203`: does it have `is_xpac`? Columns of `reliance_on_science.pcs_oa_v64` beyond `patent` and `oaid` (confidence score, front page vs in-text) before filtering on them. Also: can a card-free sandbox project query `nber-i3` at all (its user guide asks for billing enabled)?
 - [ ] `q04`: current caps of "Save results" > CSV local / Drive; expiry date shown on the sandbox table; run the Colab `%%bigquery` cell and the `bigrquery` snippet once from a throwaway account.
-- [ ] If `..\data\ce_topic_ids_sql.txt` changes before the school, rerun `..\_build\paste_ce_ids.py` (idempotent: it rewrites whatever sits between `FROM UNNEST([` and `]) AS id` in `q01` to `q04`, commented variants included).
+- [ ] If the CE set changes before the school, rerun `..\_build\paste_ce_ids.py` (idempotent: it rewrites whatever sits between `FROM UNNEST([` and `]) AS id`, commented variants included), regenerate `..\data\ce_topics.csv`, and re-upload it.
 - [ ] Sum of all recorded estimates < 500 GB.
 
 ## References used in the headers

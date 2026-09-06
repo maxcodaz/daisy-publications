@@ -2,6 +2,10 @@
 
 Built 2026-08-18 by `_build\build_green_topics.py` (run from `session\_build`, Python 3.12, pandas). Rerun the script after any change to the term lists or to the hand overrides; it overwrites the four data files below.
 
+> **Update, 3 September 2026: the demo's CE set changed.** The circular-economy id set used by the demo is no longer the 28-topic keyword-rule set documented below. It is now the **8 topics returned by the OpenAlex topics search for "circular economy"** (`api.openalex.org/topics?search=circular%20economy`, which matches the phrase in a topic's name, description or keywords). The reasoning: a one-call search the students watch happen in class is transparent and repeatable, while a 60-term regex over the catalogue is not something they can check. The leg B notebooks now run this search live and build the set from the result; the three id files below hold the same 8 ids, frozen on 3 Sep 2026, and were pasted into the leg C SQL with `paste_ce_ids.py` the same day. Do **not** rerun `build_green_topics.py` to regenerate the id files: it would restore the 28-id rule set. (`green_topics.csv` stays as the script writes it: the slides use it, and the rules below record where the 28-topic set came from.)
+>
+> The 8 topics, with works_count from the search on 3 Sep 2026: T10539 Sustainable Supply Chain Management (83,125), T11091 Extraction and Separation Processes (137,639), T13180 Chemistry and Chemical Engineering (161,854), T11672 Recycling and utilization of industrial and municipal waste in materials production (52,160), T13240 Bioeconomy and Sustainability Development (37,346), T12746 Sustainable Industrial Ecology (36,100), T13045 Industrial Engineering and Technologies (42,072), T13477 Sustainable Design and Development (26,716). All 8 were already inside the 28-topic set. Headline numbers moved accordingly: CE articles 2020-2025 are 82,277 (against 295,333), the CE share of 2024 world output is 0.22 percent (against 0.78), Russia enters the country ranking (RTA 2.8) and Indonesia leaves it. The B0 anatomy paper also changed the same day, from Ghisellini (W1732240353) to Kirchherr, Reike and Hekkert (W2756283300).
+
 ## Files
 
 | file | what it is | used by |
@@ -10,6 +14,7 @@ Built 2026-08-18 by `_build\build_green_topics.py` (run from `session\_build`, P
 | `ce_topic_ids.txt` | the circular-economy set, one bare id per line (`T10171`) | anything that reads a list |
 | `ce_topic_ids_sql.txt` | the same ids as full URLs in a BigQuery array literal, ready to paste into `UNNEST([...])` | `sql\q01`, `q02`, `q03` (leg C) |
 | `ce_topic_ids_api.txt` | the same bare ids joined by `|`, ready to paste after `primary_topic.id:` in an OpenAlex filter | VOSviewer request URL (leg A), openalexR / pyalex notebooks (leg B) |
+| `ce_topics.csv` | the same 8 topics as a two-column CSV (`topic_id_url`, `topic_name`), handed to students and uploaded in class as `daisy.ce_topics` (the upload demo of `sql\q02` step 0) | `sql\q02` (leg C) |
 
 Column layout of `green_topics.csv` (UTF-8, comma separated, header row):
 
