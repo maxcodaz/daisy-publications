@@ -1,10 +1,10 @@
 # Map 2. Country co-authorship: Climate Change Policy and Economics, 2020 to 2025
 
-The second map of leg A (VOSviewer 1.6.21, bibliographic-data route).
+VOSviewer 1.6.21, bibliographic-data route.
 
 ## Question
 
-Who collaborates with whom in climate economics, and where does Italy sit? A country co-authorship network on one OpenAlex topic shows the US, China, UK and Germany core, the European block, and the position of Italy. Coloured by average (normalised) citations it also shows whether peripheral countries publish in the well-cited part of the field. The API leg answers the same question with `group_by=authorships.countries`, and the BigQuery leg with `UNNEST(authorships)` on the full snapshot.
+Who collaborates with whom in climate economics, and where does Italy sit? A country co-authorship network on one OpenAlex topic shows the collaboration blocks and the position of each country; coloured by average normalised citations it also shows which countries publish in the well-cited part of the field.
 
 ## Request URL
 
@@ -12,7 +12,7 @@ Who collaborates with whom in climate economics, and where does Italy sit? A cou
 https://api.openalex.org/works?filter=primary_topic.id:T10471,publication_year:2020-2025
 ```
 
-`T10471` is the OpenAlex topic "Climate Change Policy and Economics". `primary_topic.id` keeps only works whose first-ranked topic is T10471; `topics.id` would also include works where it is a secondary topic. On 2 September 2026 this returned **26,954 works**, under the 50,000 cap.
+`T10471` is the OpenAlex topic "Climate Change Policy and Economics". `primary_topic.id` keeps only works whose first-ranked topic is T10471; `topics.id` would also include works where it is a secondary topic. On 2 September 2026 this returned **26,954 works** (26,962 on 6 September), under the 50,000 cap.
 
 For reference, the top 10 countries by whole counting (a work counts once for every country on it), read from `group_by=authorships.countries` on 2 September 2026, 169 countries in total:
 
@@ -24,7 +24,7 @@ For reference, the top 10 countries by whole counting (a work counts once for ev
 | 4 | Germany | 2,097 | 9 | Australia | 693 |
 | 5 | France | 1,289 | 10 | Spain | 627 |
 
-These numbers match the "documents" weight VOSviewer shows per country under full counting, up to the growth of the database between that date and your run.
+These are the "Documents" weights VOSviewer shows per country (up to the growth of the database between that date and your run).
 
 ## Click path (VOSviewer 1.6.21)
 
@@ -34,31 +34,43 @@ These numbers match the "documents" weight VOSviewer shows per country under ful
 4. Choose API: **OpenAlex**. Next.
 5. Choose the **API request URL** option and paste the URL above (API key as in map 1).
 6. Next: the download of about 27,000 works runs.
-7. Type of analysis **Co-authorship**; unit of analysis **Countries**; counting method **Full counting**. With full counting a paper with authors from four countries creates links of strength 1 between every pair; fractional counting gives each of the n links 1/n and tames the large multi-country consortia typical of climate science. Run full counting first, then repeat with fractional as a one-click robustness check.
-8. Thresholds: minimum number of documents of a country **20**; minimum citations 0. Expect roughly 60 to 70 countries to qualify.
+7. Type of analysis **Co-authorship**; unit of analysis **Countries**; counting method **Fractional counting** (the class map). With full counting a paper with authors from four countries creates links of strength 1 between every pair, so the large multi-country consortia typical of climate science dominate; fractional counting gives each of a paper's links a weight of 1/n. Rerun with full counting as a one-click robustness check: it changes link strengths, not who is connected to whom.
+8. Thresholds: minimum number of documents of a country **20**; minimum citations 0. On the 2 September 2026 data, **74 countries** qualify.
 9. Keep all countries that meet the threshold; leave all ticked. Finish.
 10. Look at **Network Visualization** first (clusters are collaboration blocks), then **Overlay Visualization** with Scores set to **Avg. norm. citations** (citations divided by the average of the same publication year, so recent papers are not penalised) or, simpler, **Avg. citations**; a third view with **Avg. pub. year** tells a timing story.
 
-In one line: bibliographic data; OpenAlex; request URL; co-authorship; countries; full counting; min. 20 documents per country; overlay by average normalised citations.
+In one line: bibliographic data; OpenAlex; request URL; co-authorship; countries; fractional counting; min. 20 documents per country; overlay by average normalised citations.
 
-## How to read the map
+## How to read the map (2 September 2026 build, 74 countries, 6 clusters)
 
-The US, China, the UK and Germany are the largest circles, and the single thickest link is UK–US, well ahead of China–US. The clusters are collaboration blocks shaped by language and history rather than plain geography: the UK sits with North-Western Europe, the US with Iberia and Latin America, France with Asia-Pacific and francophone Africa, China with Hong Kong, Singapore and Macao, and Italy anchors a Mediterranean and Eastern European cluster. Italy (rank 6, 922 works in the 2 Sept 2026 build) has the UK, the US, France, Germany and the Netherlands as strongest partners, and an average normalised citation score well above the mean of the set. Countries of the Global South appear at the edge; with full counting their position depends on a few large consortia, and with fractional counting they shrink. Treat the cluster membership of mid-core countries as an artifact of the clustering resolution; the robust part of the picture is distances and link thicknesses.
+The US, China, the UK and Germany are the largest circles. The single thickest link is **UK-US (410)**, well ahead of China-US (244), Germany-US (185) and Germany-UK (171). Total link strength ranks the US first (2,064), then the UK (1,676), Germany (1,161), China (1,064), France (674), the Netherlands (588) and Italy (548).
+
+The six clusters are collaboration blocks shaped by language and history rather than plain geography:
+
+- the **UK with North-Western Europe** (Germany, Netherlands, Switzerland, Austria, Sweden, Norway, Denmark, Finland): 9 countries, the best-cited block (average normalised citations 2.2);
+- the **US with Iberia and Latin America** (Spain, Brazil, Mexico, Portugal, Chile, Colombia, Argentina, Costa Rica) plus Kenya and Nepal;
+- **France with Asia-Pacific, South Asia and Africa** (Australia, India, Japan, South Korea, New Zealand, Indonesia, South Africa, Pakistan, Saudi Arabia, Nigeria, Ghana, Morocco and others): the largest block, 27 countries;
+- **China with Hong Kong, Singapore and Macao** (and Bulgaria);
+- **Italy with the Mediterranean and Eastern Europe** (Belgium, Russia, Poland, Turkey, Greece, Ireland, Romania, Czech Republic, Hungary, Ukraine, Iran, Slovenia, Cyprus, Israel, Slovakia and others): 21 countries;
+- **Canada** alone, so tied to the US that it forms a cluster of one.
+
+**Italy**: rank 6 with 922 works; strongest partners the UK (76), the US (72), France (56), Germany (54) and the Netherlands (42); average normalised citations **1.77**, close to the average of the mapped countries (1.64 unweighted) and below the North-Western European block (the UK 2.21, Germany 2.03, Netherlands 2.36, Switzerland 2.40).
+
+**Austria** has the highest average normalised citations of any large country on the map, **3.39** on 500 works. The reason is one institute: the International Institute for Applied Systems Analysis (IIASA, Laxenburg) is on 309 of Austria's 500 works, 62% (from `group_by=authorships.institutions.id` with `authorships.countries:AT`). Those are large international assessment papers, and whole counting credits them fully to Austria: this is the case for the fractional-counting check, and for reading small countries' scores with care (Saudi Arabia 3.79 on 96 works, Bangladesh 3.70 on 77).
+
+Treat the cluster membership of mid-core countries (Belgium with Italy, Bulgaria with China) as an artifact of the clustering resolution; the robust part of the picture is distances and link thicknesses.
 
 ## Caveats
 
 - Countries come from the institutional affiliations OpenAlex resolves; works without any resolved affiliation drop out of the map, and affiliation coverage is weaker for older and non-English records.
 - A topic is classifier output: T10471 is a coherent field, but its boundary with energy economics, environmental economics and climate impact studies is algorithmic.
-- Full versus fractional counting changes link strengths, not who is connected to whom; the choice matters most for small countries.
 - Whole counting means the country column does not sum to the number of works.
 - With OpenAlex data the wizard supports co-authorship, co-occurrence, citation and bibliographic coupling, but not co-citation (OpenAlex provides reference ids, not raw reference strings).
 
 ## Why not the full circular-economy set here
 
-The 28-topic circular-economy list in [../data/](../data/) covers about 455,000 works for 2020 to 2025 (2 September 2026), nine times the 50,000 cap, so VOSviewer cannot map it. That limit is the hand-over point of the session: the API notebook and the BigQuery scripts run the same 28-topic set on the full population. A five-topic subset that fits the cap (about 43,000 works) is:
+The 28-topic circular-economy list in [../data/](../data/) covers **455,496 works** for 2020 to 2025 (6 September 2026), nine times the 50,000 cap, so VOSviewer cannot map it. A five-topic subset that fits the cap (**43,376 works**) is:
 
 ```
 https://api.openalex.org/works?filter=primary_topic.id:T12746|T13240|T14179|T13477|T14138,publication_year:2020-2025
 ```
-
-The saved maps (`maps/A2_T10471_countries_2020_2025.json` and, if built, the CE subset) open in VOSviewer Online.

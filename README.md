@@ -15,7 +15,7 @@ During the session you watch; everything here can be rerun at home afterwards. R
 ## Contents
 
 - [SETUP.md](SETUP.md): the ten-minute setup guide sent before the school.
-- [vosviewer/](vosviewer/): click-path sheets for the three maps shown live, five take-home exercises, and (after the session) the saved maps in [vosviewer/maps/](vosviewer/maps/); the JSON files open in VOSviewer Online at app.vosviewer.com.
+- [vosviewer/](vosviewer/): click-path sheets for the three maps shown live, six take-home exercises.
 - [notebooks/](notebooks/): the Colab notebooks, one in R (openalexR, the version shown live) and one in Python (pyalex, same cells).
 - [sql/](sql/): the five BigQuery scripts, commented line by line, with bytes-scanned estimates in the headers.
 - [data/](data/): the green and circular-economy topic lists used across all three legs, with provenance notes.

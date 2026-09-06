@@ -1,10 +1,10 @@
-# Map 1. Term co-occurrence: "circular economy" in article titles, 2016 to 2025
+# Map 1. Term co-occurrence: "circular economy" in article titles
 
-The first of the three maps shown live in leg A (VOSviewer 1.6.21, text-data route, no code).
+VOSviewer 1.6.21, text-data route, no code.
 
 ## Question
 
-How has the circular-economy research agenda moved over ten years? A term map built from titles and abstracts shows which vocabularies cluster together (waste and recycling, business models and supply chains, life-cycle assessment and materials, digital technologies) and, once coloured by average publication year, which of them are old and which are recent. This is the no-code version of the question the API and BigQuery legs answer with topic ids.
+Which vocabularies make up the circular-economy literature, how do they cluster, and which of them are old and which are recent? A term map built from titles and abstracts answers this without any classifier: the structure is estimated from co-occurrence alone.
 
 ## Request URL
 
@@ -12,7 +12,9 @@ How has the circular-economy research agenda moved over ten years? A term map bu
 https://api.openalex.org/works?filter=title.search:circular%20economy,type:article,publication_year:2016-2025
 ```
 
-VOSviewer reads only the `search` and `filter` parameters of the URL and handles paging itself, so nothing else is needed. `title.search` matches the phrase in the title (stemmed, case-insensitive), `type:article` drops reviews, book chapters, preprints and editorials, and the year range keeps the map readable. On 2 September 2026 this returned **15,330 works**, well under the 50,000-work ceiling of the OpenAlex route; about 75% of them have an abstract in OpenAlex, the rest contribute their title only.
+VOSviewer reads only the `search` and `filter` parameters of the URL and handles paging itself. `title.search` matches the phrase in the title (stemmed, case-insensitive), `type:article` drops reviews, book chapters, preprints and editorials. On 2 September 2026 this returned **15,330 works** (15,318 on 6 September; counts move a little as OpenAlex merges records), well under the 50,000-work ceiling of the OpenAlex route. **11,516 of them (75%) have an abstract in OpenAlex**; the rest contribute their title only (checked with the `has_abstract:true` filter).
+
+The map shown in class was built on the **2020 to 2025** subset of the same query (13,208 works, 78% with an abstract) with a minimum of 50 occurrences per term, which gave 704 terms. With the 2016 to 2025 URL and a lower threshold the map is larger and the numbers below change; the structure should not.
 
 ## Click path (VOSviewer 1.6.21)
 
@@ -20,33 +22,41 @@ VOSviewer reads only the `search` and `filter` parameters of the URL and handles
 2. Choose type of data: **Create a map based on text data**. Next.
 3. Choose data source: **Download data through API**. Next.
 4. Choose API: **OpenAlex**. Next.
-5. Choose the **API request URL** option and paste the URL above, and paste your free API key (openalex.org/settings/api) in the **API key** field of the download step (present in VOSviewer 1.6.21; older builds lack it). Without a key the download runs on the shared keyless allowance of $0.10 per day, and a title-search query of this size will not finish on it.
-6. Next: the download runs (about 150 pages of 100 works).
+5. Choose the **API request URL** option, paste the URL above, and paste your free API key (openalex.org/settings/api) in the **API key** field. Without a key the download runs on the shared keyless allowance of $0.10 per day, which a title-search query of this size exhausts.
+6. Next: the download runs.
 7. Choose fields: **Title and abstract fields**; tick **Ignore structured abstract labels** and **Ignore copyright statements**.
 8. Counting method: **Binary counting** (a term counts once per document, so long abstracts do not dominate).
 9. Thesaurus file: none for a first pass (see "variations" below).
-10. Threshold: minimum number of occurrences of a term **20** (raise to 30 for a cleaner map).
-11. Number of terms: keep the default, the **60% most relevant** (the relevance score removes general vocabulary such as "paper" or "result").
-12. Verify selected terms: untick generic survivors ("paper", "study", "article", "literature"), and consider unticking "circular economy" itself: it co-occurs with everything and pulls the whole map to the centre. Finish.
-13. Click **Overlay Visualization**; under Scores choose **Avg. pub. year**; via Colors > Set colors range, set roughly 2018 to 2023 so both extremes are visible (blue is older, yellow is recent). Cap **Max. lines** at about 500.
+10. Threshold: minimum number of occurrences of a term. **50** reproduces the class map on the 2020 to 2025 subset; 20 to 30 gives a denser map.
+11. Number of terms: keep the default, the **60% most relevant** (the relevance score removes part of the general vocabulary).
+12. Verify selected terms: untick generic survivors ("paper", "study", "data", "literature"), and consider unticking "circular economy" itself, which co-occurs with everything and pulls the whole map to the centre. Finish.
+13. Click **Overlay Visualization**; under Scores choose **Avg. pub. year**; via Colors > Set colors range, narrow the range so both ends of the scale are populated (blue is older, yellow is recent). Reduce **Max. lines** if the map is unreadable.
 
-In one line: text data; OpenAlex; request URL; title and abstract fields; ignore labels and copyright statements; binary counting; min. occurrences 20; 60% most relevant terms; overlay by average publication year.
+In one line: text data; OpenAlex; request URL; title and abstract fields; ignore labels and copyright statements; binary counting; min. occurrences 50 (or 20 to 30); 60% most relevant terms; overlay by average publication year.
 
-## How to read the map
+## How to read the map (2020 to 2025 build, 704 terms)
 
-Node size is the number of documents mentioning the term, a link is co-occurrence in the same title or abstract, distance approximates strength of association, and colour is the cluster (network view) or the average publication year (overlay view). In the overlay, the blue end holds the older waste-and-recycling vocabulary and the yellow end the recent one (digital technologies, AI, plastics, textiles, food waste), which is where the agenda moved after 2020.
+Node size is the number of documents mentioning the term, a link is co-occurrence in the same title or abstract, distance approximates strength of association, and colour is the cluster (network view) or the average publication year (overlay view).
+
+Three clusters carry the map (plus two fragments of one or two terms):
+
+- **Engineering and materials** (292 terms, 69,564 occurrences). The largest node of the whole map is *waste* (3,228 documents), followed by *product* (2,474), *production* (2,334), *recycling* (1,293), *environmental impact* (1,011), *energy* (922), *plastic* (542), *life cycle assessment* (406), *food waste* (232). The six strongest links of the map are all inside this cluster (*product-waste* 990, *use-waste* 954, *production-waste* 911).
+- **Management and business** (320 terms, 68,039 occurrences): *company* (1,417), *adoption* (1,169), *barrier* (1,036), *business* (1,021), *stakeholder* (910), *supply chain* (765), *policymaker* (707), *business model* (698), plus the whole digital vocabulary: *digital technology* (251), *artificial intelligence* (211), *digitalization* (171), *iot* (152), *blockchain* (144), *digital transformation* (103). There is no separate digital cluster: digital terms sit with management, and only *machine learning* (71) sits with the engineers.
+- **Policy and economic development** (89 terms, 12,188 occurrences): *enterprise* (523), *european union* (497), *economic development* (277), *competitiveness* (246), *environmental protection* (193), *ukraine* (186). It is the oldest cluster (average year 2022.3 against 2022.8 and 2023.1 for the other two) and the least cited (average normalised citations 0.71, against 1.05 and 1.14).
+
+In the overlay by year, the recent end (average year 2023.8 or later) holds *policymaker*, *circular practice*, *waste reduction*, *artificial intelligence*, *policy framework*, *technological advancement*, *esg* (2024.1); the old end (2021.9 or earlier) holds *business model*, *definition*, *citizen*, *economic activity*, *european commission* (2021.0). The very newest terms are prose rather than concepts (*findings highlight* 2024.3, *valuable insight* 2024.1, *actionable insight* 2024.8): since 2023 the vocabulary of abstracts partly measures how abstracts are written, not what the research is about, which is one reason to use a thesaurus file.
+
+Best-cited terms (average normalised citations, at least 50 occurrences): *bioplastic* 3.0, *dynamic capability* 2.3, *manufacturing firm* 2.1, *additive manufacturing* 2.0; the map average is 1.05.
 
 ## Caveats
 
-- **Abstract coverage**: about 75% of the works have an abstract; coverage is lower for older years and non-English journals, so term frequencies for those groups are underestimated.
+- **Abstract coverage**: 75% of the works have an abstract; coverage is lower for older years and non-English journals, so term frequencies for those groups are underestimated.
 - **English only**: term extraction assumes English text; non-English titles produce noise or nothing.
-- **A title search is a keyword filter, not a topic**: it misses papers that say "closed-loop" or "industrial symbiosis" without the phrase "circular economy", and catches papers that use the phrase in passing. The API and BigQuery legs use OpenAlex topic ids instead; the two sets overlap but differ, and should.
+- **A title search is a keyword filter, not a topic**: it misses papers that say "closed-loop" or "industrial symbiosis" without the phrase "circular economy", and catches papers that use the phrase in passing.
 - **Noun phrases, longest match**: "artificial neural network" is one term and does not feed "neural network".
 
 ## Variations to try
 
-- A thesaurus file (two columns: `label`, `replace by`) merges variants such as "circular economy" and "circular economies", or blanks out terms you want ignored.
-- Swap `title.search` for `title_and_abstract.search` or `default.search`: the counts change a lot, the map structure less than you would expect.
-- Move the relevance cut from 60% to 50% or 70%: the periphery changes, the core does not.
-
-The saved map (`maps/A1_ce_terms_2016_2025.json`) opens in VOSviewer Online: app.vosviewer.com > Open.
+- A thesaurus file (tab-separated, two columns: `label`, `replace by`; an empty second column drops the term) merges variants and removes generic or prose terms ("data", "literature", "valuable insight").
+- Swap `title.search` for `title_and_abstract.search` or `default.search`: the counts change a lot.
+- Move the relevance cut from 60% to 50% or 70%, or the occurrence threshold from 50 to 20: the periphery changes, the core does not.

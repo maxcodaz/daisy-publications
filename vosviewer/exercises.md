@@ -1,6 +1,6 @@
-# Take-home sheet: five VOSviewer + OpenAlex exercises
+# Take-home sheet: six VOSviewer + OpenAlex exercises
 
-Five copy-paste exercises to rerun after the session with VOSviewer 1.6.21 (vosviewer.com/download, Java 8 or later) and the OpenAlex API. They come from the ICE PhD course "Economics of Science", class 4 (slides 21 to 25), with the year filters moved to 2019 to 2025 and one syntax fix. For each: File > Create > choose bibliographic or text data > Download data through API > OpenAlex > paste the request URL. VOSviewer reads only the `search` and `filter` parts of the URL; `page`, `sort` and `per_page` are ignored, so the URLs below carry only the filter. Every URL returns at most 50,000 works, the ceiling of the OpenAlex route. Counts were read from the API on 2 Sept 2026 with keyless calls (`per_page=1`, `meta.count`); they grow a little every week. VOSviewer 1.6.21 has an API key field in the download step: paste the free key from openalex.org/settings/api (see the setup guide). Without it you run on $0.10 per day of keyless credit, which is not enough for exercise 3 (search queries cost ten times a plain filter).
+Six copy-paste exercises to rerun after the session with VOSviewer 1.6.21 (vosviewer.com/download, Java 8 or later) and the OpenAlex API. They come from the ICE PhD course "Economics of Science", class 4 (slides 21 to 25), with the year filters moved to 2019 to 2025 and one syntax fix. For each: File > Create > choose bibliographic or text data > Download data through API > OpenAlex > paste the request URL. VOSviewer reads only the `search` and `filter` parts of the URL; `page`, `sort` and `per_page` are ignored, so the URLs below carry only the filter. Every URL returns at most 50,000 works, the ceiling of the OpenAlex route. Counts were read from the API on 2 Sept 2026 with keyless calls (`per_page=1`, `meta.count`); they grow a little every week. VOSviewer 1.6.21 has an API key field in the download step: paste the free key from openalex.org/settings/api (see the setup guide). Without it you run on $0.10 per day of keyless credit, which is not enough for exercise 3 (search queries cost ten times a plain filter).
 
 ## 1. Co-authorship network of one researcher
 
@@ -37,7 +37,7 @@ Five copy-paste exercises to rerun after the session with VOSviewer 1.6.21 (vosv
 - Count: 1,650 works (3,673 without the year filter).
 - Syntax fix, please read: the class-4 URL wrote the AND as `authorships.institutions.lineage:I55143463+I177477856`. On 2 Sept 2026 that URL returned 134,340 works, which is the count for UniTo alone (the second id is dropped), and 52,364 for 2019 to 2025, above the 50,000 cap. Repeating the filter key, as in the URL above, gives the intersection. If you copy a URL from an old slide, check `meta.count` in a browser first.
 - Map: bibliographic data > co-occurrence > unit **Topics** (or Keywords) > full counting > minimum occurrences 5 > overlay by Avg. pub. year.
-- Try: swap the two ids for your own university and its main partner; try `authorships.institutions.lineage:I55143463|I177477856` (OR) to see the union instead (count not checked; it will be large, add years or `type:article`).
+- Try: swap the two ids for your own university and its main partner; try `authorships.institutions.lineage:I55143463|I177477856` (OR) to see the union instead (add years or `type:article` to stay under the cap).
 
 ## 5. Co-authorship network of the researchers of one university
 
