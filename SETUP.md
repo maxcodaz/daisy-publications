@@ -35,19 +35,19 @@ Part of the session uses Google Colab (colab.research.google.com), a free notebo
 
 ## 4. Google BigQuery sandbox (4 minutes, no credit card)
 
-BigQuery is Google's SQL warehouse. The **sandbox** is free and needs no card: 10 GB of storage, 1 TiB of query processing per month, and tables you create expire after 60 days. All you need is an account and a sandbox project. The public datasets used in class are written with their full name inside every query, so there is nothing to add, star or link in your project.
+BigQuery is Google's SQL warehouse. The **sandbox** is the free mode: no credit card, no billing account, 10 GB of storage, 1 TiB of query processing per month, and tables you create expire after 60 days. The goal of this step is only to have a sandbox project ready under your Google account; nothing is queried, added or starred now.
 
-1. With the same Google account, open **console.cloud.google.com/bigquery** and accept the terms of service.
-2. If the page asks you to create a project, click **Create project**, give it any name (for example `daisy`) and confirm. If you already have a project, pick it in the project selector at the top of the page. A **Sandbox** badge appears next to the project name: that is the free, card-free mode. Leave it as it is and ignore any "Activate" or "Upgrade" button.
-3. Click **+ Compose new query** (or use the query tab that is already open), paste the query below, and before pressing **Run** look at the top right of the editor: the green tick says "This query will process X GB when run". That estimate is free, and BigQuery bills by bytes scanned, so it is the habit to keep.
+Use a **personal Gmail account**, not a university one (institutional accounts are often blocked from the Cloud console, see section 5). Do **not** go through the "Try for free" / "Start free trial" / "Activate" buttons: those are the paid path and ask for a card. The sandbox needs none of them.
 
-   ```sql
-   SELECT COUNT(*)
-   FROM `subugoe-collaborative.openalex_walden.works`
-   WHERE publication_year = 2024 AND NOT is_xpac
-   ```
+1. Open **console.cloud.google.com/bigquery** in your browser and sign in with your Google account.
+2. A **Welcome** window appears the first time: choose your country, tick the box to agree to the Google Cloud terms of service, and click **Agree and continue**. Leave any "email updates" box unticked.
+3. The BigQuery page opens but says you have no project ("Select a project" or "Create a project" in a bar at the top). Click **Create project**. If you see instead a project selector in the top bar, click it and then **New project** at the top right of the dialog.
+4. In the **New project** form, **Project name**: type any name of your choice, for example your surname followed by `-bigquery`. Do not name it after the course, it makes the Explorer pane confusing later. **Location / Organisation**: leave "No organisation". Click **Create**. Google generates a project id (your name plus a number) under the name field: you do not need to change it.
+5. Wait a few seconds. A notification (bell icon, top right) says the project is created; if the page does not switch to it by itself, open the project selector in the top bar and pick it.
+6. You are now in the BigQuery console of your project. At the top of the page, a blue bar says something like **"You're using the BigQuery sandbox"** with an **Activate** (or **Upgrade**) button. This bar is the confirmation that you are in the free, card-free mode. Do **not** click the button. Ignore it every time it reappears.
+7. Check: in the **Explorer** pane on the left, your project name is listed. That is all. Close the tab; the sandbox stays available under this account, nothing has to be kept open.
 
-   Run it; you should get a count of several million rows. If it runs, your account is ready.
+Later, if a window ever asks for a credit card or a billing account, you have clicked on the paid path by mistake: close it and go back to **console.cloud.google.com/bigquery**.
 
 ## 5. If something does not work
 
