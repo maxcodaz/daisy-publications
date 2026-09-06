@@ -11,7 +11,7 @@ BigQuery Standard SQL scripts on the full OpenAlex snapshot: how much circular-e
 | `q01_green_by_year.sql` | CE articles vs all articles by year 2000 to 2025, share; commented variant counting any topic (`topics[]`) instead of the primary one | same |
 | `q02_green_by_country.sql` | CE articles 2015 to 2025 by author country, full and fractional counting, top 20, RTA; step 0 creates the `daisy` dataset and reads the CE topic list from the uploaded `ce_topics.csv` | same + your `daisy.ce_topics` |
 | `q03_patcit_green.sql` | CE articles 2000 to 2016 joined to PatCit front-page citations on DOI: share cited by patents and citing patents per cited article, by year and by subfield; citing office; lag in years; block 7 = how to export the result | same + `patcit-public-data.frontpage.bibliographical_reference` |
-| `q04_export_examples.sql` | reference: materialise a result, Save results, EXPORT DATA, Colab `%%bigquery` and R `bigrquery` snippets, pitfalls | same |
+| `q04_export_examples.sql` | reference: materialise a result, Save results, EXPORT DATA, Colab `%%bigquery` and R `bigrquery` snippets, pitfalls; the Colab route, CSV and bucket included, is a runnable notebook in `../notebooks/daisy_bigquery_to_bucket.ipynb` | same |
 
 The CE topic set is the 8 topics returned by the OpenAlex topics search for "circular economy" (`api.openalex.org/topics?search=circular%20economy`); the list with names is in `../data/ce_topics.csv`. It enters the scripts in two ways, on purpose: `q01` and `q03` inline it as a `WITH green AS (SELECT id FROM UNNEST([...]))` block so they run anywhere, while `q02` reads it from `daisy.ce_topics`, a table you create by uploading `ce_topics.csv` into your own dataset.
 

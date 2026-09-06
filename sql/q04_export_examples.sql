@@ -40,7 +40,9 @@
 
 -- ---------------------------------------------------------------------------
 -- (4) STRAIGHT INTO COLAB (Python), no CSV in between. Bytes are billed to
---     the project you name (a sandbox project works).
+--     the project you name (a sandbox project works). The runnable version,
+--     CSV and gsutil copy to a bucket included, is
+--     ..\notebooks\daisy_bigquery_to_bucket.ipynb.
 --
 --     from google.colab import auth
 --     auth.authenticate_user()                        # Google login popup
