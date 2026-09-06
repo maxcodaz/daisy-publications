@@ -6,9 +6,6 @@ Two notebooks with the same four blocks (B0 anatomy of a work record and cost, B
 |---|---|---|---|---|
 | `daisy_openalex_api_R.ipynb` | R | Runtime > Change runtime type > **R** | openalexR 3.1.0 (CRAN) | no |
 | `daisy_openalex_api_python.ipynb` | Python 3 | default | pyalex 0.21, pandas, matplotlib | yes |
-| `daisy_bigquery_to_bucket.ipynb` | Python 3 | default | google-cloud-bigquery, pandas, gsutil (all preinstalled) | no |
-
-The third notebook, `daisy_bigquery_to_bucket.ipynb`, belongs to the BigQuery leg: it reads a table of your `daisy` dataset (the pairs table written by `sql/q03_patcit_green.sql`) into pandas with `%%bigquery`, writes it to CSV and copies the CSV to a Cloud Storage bucket with `gsutil`, each line commented. It needs the `your-project-id` placeholder replaced by your project id; the bucket step also needs a bucket, which a sandbox project cannot create (billing), so sandbox users stop at the CSV or use the Google Drive alternative shown at the end.
 
 ## Opening in Colab
 
