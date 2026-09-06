@@ -35,11 +35,11 @@ Part of the session uses Google Colab (colab.research.google.com), a free notebo
 
 ## 4. Google BigQuery sandbox (4 minutes, no credit card)
 
-BigQuery is Google's SQL warehouse. The **sandbox** is free and needs no card: 10 GB of storage, 1 TiB of query processing per month, and tables you create expire after 60 days.
+BigQuery is Google's SQL warehouse. The **sandbox** is free and needs no card: 10 GB of storage, 1 TiB of query processing per month, and tables you create expire after 60 days. All you need is an account and a sandbox project. The public datasets used in class are written with their full name inside every query, so there is nothing to add, star or link in your project.
 
-1. With the same Google account, open **console.cloud.google.com/bigquery**. Accept the terms; if asked, create a project (any name). A "Sandbox" badge appears at the top of the page.
-2. In the Explorer panel on the left click **+ Add** (or "Add data") > **Star a project by name**, type `subugoe-collaborative` and Star. Repeat for `patcit-public-data` and `nber-i3`. If `nber-i3` does not show up or refuses queries from a sandbox, that is not your mistake (it asks for an account with billing enabled) and it is not required.
-3. Open a query tab, paste the query below, and before pressing **Run** look at the top right of the editor: the green tick says "This query will process X GB when run". That estimate is free, and BigQuery bills by bytes scanned, so it is the habit to keep.
+1. With the same Google account, open **console.cloud.google.com/bigquery** and accept the terms of service.
+2. If the page asks you to create a project, click **Create project**, give it any name (for example `daisy`) and confirm. If you already have a project, pick it in the project selector at the top of the page. A **Sandbox** badge appears next to the project name: that is the free, card-free mode. Leave it as it is and ignore any "Activate" or "Upgrade" button.
+3. Click **+ Compose new query** (or use the query tab that is already open), paste the query below, and before pressing **Run** look at the top right of the editor: the green tick says "This query will process X GB when run". That estimate is free, and BigQuery bills by bytes scanned, so it is the habit to keep.
 
    ```sql
    SELECT COUNT(*)
@@ -47,7 +47,7 @@ BigQuery is Google's SQL warehouse. The **sandbox** is free and needs no card: 1
    WHERE publication_year = 2024 AND NOT is_xpac
    ```
 
-   Run it; you should get a count of several million rows.
+   Run it; you should get a count of several million rows. If it runs, your account is ready.
 
 ## 5. If something does not work
 

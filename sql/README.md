@@ -17,7 +17,7 @@ The CE topic set is inlined in every script as a `WITH green AS (SELECT id FROM 
 ## How to run
 
 1. Sign in to console.cloud.google.com with any Google account. Without a billing account BigQuery runs in **sandbox** mode: no card, 10 GB of storage, tables expire after 60 days, 1 TiB of query processing per month free, and you can query public datasets in other projects.
-2. In the BigQuery Explorer pane click "+ Add" > "Star a project by name" and star `subugoe-collaborative` and `patcit-public-data` (and `nber-i3` for the alternative tables). Starring only makes them visible; it costs nothing.
+2. Nothing has to be starred or added to your project: every script names its tables in full (`subugoe-collaborative.openalex_walden.works`, `patcit-public-data.frontpage...`, `nber-i3...`) and BigQuery resolves them from any project.
 3. Open a script, paste it in the editor, and read the validator line at the top right: "This query will process X GB when run". That dry-run estimate is free and is the number to compare with the header of each script. If the estimate is far above the header value, stop and look for a `SELECT *` or a missing filter.
 4. Run order: `q00` (blocks a1 to a4 are free or almost free; block b costs real bytes, decide whether to run it or only show its estimate), then `q01`, `q02`, `q04` step 0 (creates the `daisy` dataset; needed before `q03` step 1 and `q04` step 1), `q03`, `q04`.
 5. Multi-statement files: the console runs the statements one after the other and shows one result tab per statement. To run a single block, select it with the mouse and press Ctrl+Enter (or Cmd+Enter).
@@ -28,7 +28,7 @@ Dataset locations: BigQuery cannot join or copy across regions. Before the demo 
 
 ## Alternative tables on `nber-i3`
 
-`nber-i3` is the i3 BigQuery workspace (Marx & Shvadron 2025); it needs the project starred, no request form. One caveat: the i3 user guide (https://i3open.org/bigquery.html, June 2026, checked 18 Aug 2026) lists a Google Cloud account with billing enabled as a prerequisite, so whether a card-free sandbox project can query `nber-i3` is a rehearsal check; `subugoe-collaborative` and `patcit-public-data` are the sandbox path. Every script has a "SWITCH TO nber-i3" line in its header.
+`nber-i3` is the i3 BigQuery workspace (Marx & Shvadron 2025); no request form and no starring needed. One caveat: the i3 user guide (https://i3open.org/bigquery.html, June 2026, checked 18 Aug 2026) lists a Google Cloud account with billing enabled as a prerequisite, so whether a card-free sandbox project can query `nber-i3` is a rehearsal check; `subugoe-collaborative` and `patcit-public-data` are the sandbox path. Every script has a "SWITCH TO nber-i3" line in its header.
 
 | purpose | subugoe-collaborative (default) | nber-i3 (fallback) |
 |---|---|---|
