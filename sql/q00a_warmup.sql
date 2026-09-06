@@ -1,5 +1,5 @@
 -- ============================================================================
--- q00a_warmup.sql  (DAISY 2026 BigQuery demo, C1: first queries, built live)
+-- q00a_warmup.sql  (DAISY 2026 BigQuery demo: first queries)
 -- Four statements of growing size, run one at a time: select a block, read
 -- the estimate at the top right, Ctrl+Enter. (1) is free; (2) to (4) read
 -- only id and small columns, a few GB each.

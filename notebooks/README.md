@@ -1,11 +1,11 @@
-# Leg B notebooks: OpenAlex API from Colab
+# OpenAlex API from Colab
 
-Two notebooks with the same four blocks (B0 anatomy and cost, B1 trend, B2 geography and RTA, B3 SDG landscape and priorities). The instructor demos the R one; both are handed to students. Nothing is loaded from disk; every number comes from live API calls (about 320 per run, almost all of them the two uncapped institution downloads of B2, which take a few minutes).
+Two notebooks with the same four blocks (B0 anatomy of a work record and cost, B1 trend, B2 geography and RTA, B3 SDG landscape and priorities), one in R and one in Python: same calls, same numbers. Nothing is loaded from disk; every number comes from live API calls (about 320 per run, almost all of them the two uncapped institution downloads of B2, which take a few minutes).
 
-| File | Language | Colab runtime | Package | Demoed |
+| File | Language | Colab runtime | Package | Outputs stored |
 |---|---|---|---|---|
-| `daisy_openalex_api_R.ipynb` | R | Runtime > Change runtime type > **R** | openalexR 3.1.0 (CRAN, July 2026) | yes |
-| `daisy_openalex_api_python.ipynb` | Python 3 | default | pyalex 0.21 (Feb 2026), pandas, matplotlib | twin, outputs stored |
+| `daisy_openalex_api_R.ipynb` | R | Runtime > Change runtime type > **R** | openalexR 3.1.0 (CRAN) | no |
+| `daisy_openalex_api_python.ipynb` | Python 3 | default | pyalex 0.21, pandas, matplotlib | yes |
 
 ## Opening in Colab
 
@@ -16,7 +16,7 @@ Two notebooks with the same four blocks (B0 anatomy and cost, B1 trend, B2 geogr
 
 ## API key and cost
 
-- Since 13 February 2026 OpenAlex expects a key. Free: log in at openalex.org/settings/api and copy the key.
+- OpenAlex expects an API key. It is free: log in at openalex.org/settings/api and copy the key.
 - Budget: 1 USD per day with a free key. A list, filter or group_by call costs 0.0001 USD, a text search 0.001 USD, a single-record lookup nothing. Keyless calls still work with a 0.10 USD daily budget (about 1,000 calls), enough to run either notebook once.
-- Where to paste it: both notebooks have a `YOUR_API_KEY <- ""` / `YOUR_API_KEY = ""` line in the setup cell. Left empty, the notebooks run keyless, so a forgotten key does not break the demo.
+- Where to paste it: both notebooks have a `YOUR_API_KEY <- ""` / `YOUR_API_KEY = ""` line in the setup cell. Left empty, the notebooks run keyless, so a forgotten key does not break anything.
 - One run of either notebook: about 320 calls (each page of 200 institution groups is one call), roughly 0.03 USD; keyless still fits one full run. Every response carries `meta.cost_usd`; B0 shows it.

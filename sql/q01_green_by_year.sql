@@ -1,14 +1,12 @@
 -- ============================================================================
--- q01_green_by_year.sql  (DAISY 2026 BigQuery demo, C2: volume)
+-- q01_green_by_year.sql  (DAISY 2026 BigQuery demo: volume)
 -- Circular-economy (CE) articles per year next to all articles, and the
 -- share: is CE science growing faster than science? Reads 4 small columns;
 -- check the estimate before running.
 -- Table: subugoe-collaborative.openalex_walden.works (June 2026 snapshot).
 -- CE set: the 8 topics returned by the OpenAlex topics search "circular
--- economy", frozen 3 Sept 2026 (see data/README.md). Inlined below so the
--- script runs anywhere; q02 shows the upload route instead.
--- API cross-check (keyless, 4 Sept 2026, corpus=core, same filters):
--- 217,169 articles 2000-2025; 3,147 in 2000, 9,725 in 2015, 17,915 in 2025.
+-- economy" (names and ids in data/ce_topics.csv), inlined below so the
+-- script runs anywhere.
 -- ============================================================================
 
 -- STEP 0: the CE topic set as a one-column table built from an array literal.

@@ -1,7 +1,6 @@
 -- ============================================================================
 -- q04_export_examples.sql  (DAISY 2026 BigQuery demo, take-home: exports)
--- Optional reference, not run live (the live export is shown on q03's pairs
--- table, block 7 there). How a result becomes a file for your paper.
+-- Reference: how a result becomes a file for your paper.
 -- your-project-id IS A PLACEHOLDER: replace it everywhere (Ctrl+H) by your
 -- own project id.
 -- ============================================================================

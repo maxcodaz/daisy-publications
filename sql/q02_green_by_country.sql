@@ -1,5 +1,5 @@
 -- ============================================================================
--- q02_green_by_country.sql  (DAISY 2026 BigQuery demo, C2: geography)
+-- q02_green_by_country.sql  (DAISY 2026 BigQuery demo: geography)
 -- Which countries produce CE science and which specialise in it: full and
 -- fractional counting, shares, RTA = (country CE share) / (world CE share).
 -- Top 20 by CE count; Italy is inside (adapting the script to a country
@@ -9,8 +9,8 @@
 -- your-project-id IS A PLACEHOLDER: replace it everywhere (Ctrl+H) by your
 -- own project id (shown in the console's project picker).
 -- Missing countries: about a third of articles carry no author country and
--- drop out of every count below (API check, 5 Sept 2026, articles 2015-2025:
--- 61.9% of all articles have at least one country, 66.3% of CE articles).
+-- drop out of every count below (about 62% of all articles 2015-2025 have
+-- at least one author country, 66% of CE articles).
 -- Read the results as "among articles with a known author country".
 -- ============================================================================
 

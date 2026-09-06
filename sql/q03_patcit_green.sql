@@ -1,15 +1,15 @@
 -- ============================================================================
--- q03_patcit_green.sql  (DAISY 2026 BigQuery demo, C3: science to patents)
+-- q03_patcit_green.sql  (DAISY 2026 BigQuery demo: science to patents)
 -- CE articles 2000-2016 joined on DOI to the patents citing them on the
 -- front page: share cited, by year and by subfield, citing office, lag.
 -- Tables: subugoe-collaborative.openalex_walden.works and
--- patcit-public-data.frontpage.bibliographical_reference (both projects
--- starred; the datasets and your daisy dataset must share one location).
--- Writes your-project-id.daisy.q03_ce_patcit_pairs (dataset created in q02
--- STEP 0). your-project-id IS A PLACEHOLDER: replace it everywhere (Ctrl+H)
+-- patcit-public-data.frontpage.bibliographical_reference (the two source
+-- datasets and your daisy dataset must share one location).
+-- Writes your-project-id.daisy.q03_ce_patcit_pairs (create the dataset
+-- first: CREATE SCHEMA IF NOT EXISTS `your-project-id.daisy`). your-project-id IS A PLACEHOLDER: replace it everywhere (Ctrl+H)
 -- by your own project id.
 --
--- PatCit (fact-checked 18 Aug 2026): open-source dataset started in 2019 by
+-- PatCit: open-source dataset started in 2019 by
 -- Gaetan de Rassenfosse (EPFL) and Cyril Verluise (College de France / PSE).
 -- Front-page NPL citations from DOCDB (90+ patent offices), parsed with
 -- GROBID, classified into 10 categories, matched to Crossref and PubMed
