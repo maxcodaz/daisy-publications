@@ -1,32 +1,45 @@
 # Before the session "Publications as innovation data" (DAISY 2026): a 10-minute setup
 
-Dear participants, the session on publication data (OpenAlex, VOSviewer, BigQuery) is a live demonstration: nothing below is required to follow it, and every script, notebook and map will be shared afterwards. If you want to run the same queries on your laptop during or after the session, please do these four things in advance (about ten minutes, no payment details anywhere).
+Dear participants, if you want to run the material on your laptop during or after the session, please do these four things in advance. It takes about ten minutes and no payment details are asked anywhere. What the session covers is explained in class.
 
-**What to bring**: a laptop with a charger, the Google account you set up below, and the OpenAlex key saved somewhere you can copy it from.
+**What to bring**: a laptop with a charger, the Google account you use below, and your OpenAlex API key saved somewhere you can copy it from.
 
 ## 1. OpenAlex account and free API key (2 minutes)
 
-OpenAlex (openalex.org) is the open catalogue of about 250 million scholarly works we will use in all three parts. Since February 2026 an API key is needed for anything beyond a few test calls, and you will need one to rebuild the maps and rerun the notebooks. Getting it takes two minutes:
+OpenAlex (openalex.org) is an open catalogue of scholarly works. Since February 2026 an API key is needed for anything beyond a few test calls.
 
-1. Go to **openalex.org**, create a free account (sign up with your email and confirm it).
-2. Open **openalex.org/settings/api** while logged in and create your API key. Copy it into a text file you can find again; treat it like a password, since it is tied to your account.
-3. Where to paste it, depending on the tool: in **VOSviewer**, the API key field of the download-through-API step; in the **notebooks**, the cell that says `API_KEY = "..."`; in a **browser**, append `&api_key=YOUR_KEY` to the query URL.
+1. Go to **openalex.org** and create a free account (sign up with your email and confirm it).
+2. While logged in, open **openalex.org/settings/api** and create your API key.
+3. Copy the key into a text file you can find again. Treat it like a password: it is tied to your account.
 
-The free tier gives $1 of credit per day, and the prices make it hard to spend: a list or filter query costs $0.0001 per page and a text search query $0.001 per page, so downloading a full 15,000-work map costs about $0.15 and a full rerun of our notebooks well under one cent. Requests without a key still work on $0.10 per day of shared credit, but that allowance is shared by everyone behind the same network address, so on a classroom Wi-Fi it evaporates: get the key.
+The free tier gives $1 of credit per day; a normal query costs a fraction of a cent, so the allowance is hard to exhaust. Requests without a key run on a shared allowance of $0.10 per day per network address, which disappears in seconds on a classroom Wi-Fi: get the key.
 
 ## 2. VOSviewer 1.6.21 (3 minutes)
 
-VOSviewer builds and draws bibliometric maps and can download data from OpenAlex directly. Download version 1.6.21 (12 June 2026) from **vosviewer.com/download**: there is a Windows build, a macOS build, and a plain JAR for other systems. It needs Java 8 or later, which is not bundled: if you do not have Java, install it from java.com or adoptium.net first. Unzip the download into a new folder and start `VOSviewer.exe` (Windows) or the VOSviewer app (macOS; if macOS refuses to open an app from an unidentified developer, right-click the app and choose Open). To check that everything works: File tab > **Create** > "Create a map based on bibliographic data" > **Download data through API** > **OpenAlex** > choose the request-URL option and paste
-`https://api.openalex.org/works?filter=authorships.author.id:A5073659024,primary_location.source.type:journal`
-then Next until the co-authorship map appears (about 115 works, a few seconds). In the download step, paste your OpenAlex API key in the **API key** field (present since VOSviewer 1.6.21; make sure you are not on an older build, which has no key support and falls back to a shared keyless allowance too small for the bigger queries).
+VOSviewer is a free desktop program for building and drawing bibliometric maps. Install version **1.6.21** (June 2026); older versions lack the OpenAlex API key field and will not work for the session.
 
-## 3. Google account and a BigQuery sandbox (4 minutes, no credit card)
+- **Windows**: download the exact build used in class from this repository, [VOSviewer_1.6.21_exe.zip](https://github.com/maxcodaz/daisy-publications/releases/download/vosviewer-1.6.21/VOSviewer_1.6.21_exe.zip) (63 MB). Unzip it into a new folder and start `VOSviewer.exe`.
+- **macOS and other systems**: download the macOS build or the plain JAR from **vosviewer.com/download**. If macOS refuses to open an app from an unidentified developer, right-click the app and choose Open. The JAR is started with `java -jar VOSviewer.jar`.
 
-BigQuery is Google's SQL warehouse; the whole of OpenAlex (510 million records) sits there in public tables and a query over all of it takes seconds. The **sandbox** is free and needs no card: 10 GB of storage, 1 TiB of query processing per month, and tables you create expire after 60 days.
+VOSviewer needs **Java 8 or later**, which is not bundled: if it does not start, install Java from adoptium.net (or java.com) and try again.
 
-1. With a Google account, open **console.cloud.google.com/bigquery**. Accept the terms; if asked, create a project (any name). A "Sandbox" badge appears at the top of the page.
-2. In the Explorer panel on the left click **+ Add** (or "Add data") > **Star a project by name** and type `subugoe-collaborative`, then Star. Repeat for `patcit-public-data` and `nber-i3`. The three projects now appear in your Explorer with their public datasets (OpenAlex, Crossref, Unpaywall, PatCit front-page citations, Reliance on Science, PatentsView). If `nber-i3` does not show up or refuses queries from a sandbox, that is not your mistake: its user guide asks for an account with billing enabled; the session runs on the other two projects.
-3. Open a query tab and paste
+To check the installation: start VOSviewer, then File tab > **Create** > "Create a map based on bibliographic data" > **Download data through API** > **OpenAlex**. You should see an **API key** field on that page; if you do not, you are on an older version. Close the dialog, nothing else is needed for now.
+
+## 3. Google Colab (1 minute)
+
+Part of the session uses Google Colab (colab.research.google.com), a free notebook service that runs in the browser with a Google account.
+
+1. Open **colab.research.google.com** and sign in with your Google account.
+2. Choose **New notebook**, type `1 + 1` in the cell and press Shift+Enter. If you get `2`, Colab works.
+3. Check that **Runtime > Change runtime type** lets you pick **R** as well as Python (both are used). Switch back or just close the notebook.
+
+## 4. Google BigQuery sandbox (4 minutes, no credit card)
+
+BigQuery is Google's SQL warehouse. The **sandbox** is free and needs no card: 10 GB of storage, 1 TiB of query processing per month, and tables you create expire after 60 days.
+
+1. With the same Google account, open **console.cloud.google.com/bigquery**. Accept the terms; if asked, create a project (any name). A "Sandbox" badge appears at the top of the page.
+2. In the Explorer panel on the left click **+ Add** (or "Add data") > **Star a project by name**, type `subugoe-collaborative` and Star. Repeat for `patcit-public-data` and `nber-i3`. If `nber-i3` does not show up or refuses queries from a sandbox, that is not your mistake (it asks for an account with billing enabled) and it is not required.
+3. Open a query tab, paste the query below, and before pressing **Run** look at the top right of the editor: the green tick says "This query will process X GB when run". That estimate is free, and BigQuery bills by bytes scanned, so it is the habit to keep.
 
    ```sql
    SELECT COUNT(*)
@@ -34,12 +47,13 @@ BigQuery is Google's SQL warehouse; the whole of OpenAlex (510 million records) 
    WHERE publication_year = 2024 AND NOT is_xpac
    ```
 
-   Before pressing **Run**, look at the top right of the editor: the green tick shows "This query will process X GB when run". That estimate is free and is the habit to keep: BigQuery bills by bytes scanned, and this query touches only two small columns of the table (expect a few GB, far from the free 1 TiB), whereas `SELECT *` on the same table would scan the whole thing. Then run it; you should get a count of several million works published in 2024.
-
-## 4. Colab notebooks (1 minute)
-
-The API part uses Google Colab (colab.research.google.com), free with the same Google account. Open the two notebooks (links to be sent with the material: `[R notebook, openalexR]` and `[Python notebook, pyalex]`); for the R notebook choose **Runtime > Change runtime type > R** before running. Each notebook installs its own packages and asks only for your OpenAlex key.
+   Run it; you should get a count of several million rows.
 
 ## 5. If something does not work
 
-Nothing is lost: the session is a demonstration, and all material (slides, VOSviewer maps, notebooks, SQL scripts, this guide) is available afterwards, so you can set things up at home and rerun everything. If your **institutional Google account** refuses to open the Cloud console or Colab ("this service is not available for your organisation" or a permission error), the administrator has switched Cloud services off for that domain: use a personal Gmail account instead. If Java refuses to start VOSviewer on macOS, the JAR download plus `java -jar VOSviewer.jar` in a terminal is the fallback. Bring your questions to the session.
+Nothing is lost: the session is a live demonstration and everything can be set up and rerun at home afterwards. Two known problems:
+
+- If your **institutional Google account** refuses to open the Cloud console or Colab ("this service is not available for your organisation" or a permission error), the administrator has switched Cloud services off for that domain: use a personal Gmail account instead.
+- If Java refuses to start VOSviewer on macOS, download the JAR and run `java -jar VOSviewer.jar` in a terminal.
+
+Bring your questions to the session.
