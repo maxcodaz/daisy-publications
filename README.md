@@ -19,7 +19,6 @@ During the session you watch; everything here can be rerun at home afterwards. R
 - [notebooks/](notebooks/): the Colab notebooks, one in R (openalexR, the version shown live) and one in Python (pyalex, same cells).
 - [sql/](sql/): the five BigQuery scripts, commented line by line, with bytes-scanned estimates in the headers.
 - [data/](data/): the green and circular-economy topic lists used across all three legs, with provenance notes.
-- [readings/](readings/): the reading list with DOIs.
 - Slides: the PDF is added here after the school.
 
 ## Contact
