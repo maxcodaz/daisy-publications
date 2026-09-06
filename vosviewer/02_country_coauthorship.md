@@ -43,7 +43,7 @@ In one line: bibliographic data; OpenAlex; request URL; co-authorship; countries
 
 ## How to read the map (September 2026 build, 74 countries, 6 clusters)
 
-The US, China, the UK and Germany are the largest circles. The single thickest link is **UK-US (410)**, well ahead of China-US (244), Germany-US (185) and Germany-UK (171). Total link strength ranks the US first (2,064), then the UK (1,676), Germany (1,161), China (1,064), France (674), the Netherlands (588) and Italy (548).
+The US, China, the UK and Germany are the largest circles. The single thickest link is **UK-US (410)**, well ahead of China-US (245), Germany-US (185) and Germany-UK (171). Total link strength ranks the US first (2,064), then the UK (1,676), Germany (1,161), China (1,064), France (674), the Netherlands (588) and Italy (548).
 
 The six clusters are collaboration blocks shaped by language and history rather than plain geography:
 

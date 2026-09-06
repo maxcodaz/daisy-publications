@@ -14,7 +14,7 @@ https://api.openalex.org/works?filter=title.search:circular%20economy,type:artic
 
 VOSviewer reads only the `search` and `filter` parameters of the URL and handles paging itself. `title.search` matches the phrase in the title (stemmed, case-insensitive), `type:article` drops reviews, book chapters, preprints and editorials. In September 2026 this returned about **15,300 works** (counts move a little as OpenAlex adds and merges records), well under the 50,000-work ceiling of the OpenAlex route. **11,516 of them (75%) have an abstract in OpenAlex**; the rest contribute their title only (checked with the `has_abstract:true` filter).
 
-The map shown in class was built on the **2020 to 2025** subset of the same query (13,208 works, 78% with an abstract) with a minimum of 50 occurrences per term, which gave 704 terms. With the 2016 to 2025 URL and a lower threshold the map is larger and the numbers below change; the structure should not.
+The map shown in class was built on the **2021 to 2025** subset of the same query (about 11,950 works, 79% with an abstract) with a minimum of 50 occurrences per term, which gave 637 terms. With the 2016 to 2025 URL and a lower threshold the map is larger and the numbers below change; the structure should not.
 
 ## Click path (VOSviewer 1.6.21)
 
@@ -27,26 +27,26 @@ The map shown in class was built on the **2020 to 2025** subset of the same quer
 7. Choose fields: **Title and abstract fields**; tick **Ignore structured abstract labels** and **Ignore copyright statements**.
 8. Counting method: **Binary counting** (a term counts once per document, so long abstracts do not dominate).
 9. Thesaurus file: leave empty.
-10. Threshold: minimum number of occurrences of a term. **50** reproduces the class map on the 2020 to 2025 subset; 20 to 30 gives a denser map.
+10. Threshold: minimum number of occurrences of a term. **50** reproduces the class map on the 2021 to 2025 subset; 20 to 30 gives a denser map.
 11. Number of terms: keep the default, the **60% most relevant** (the relevance score removes part of the general vocabulary).
 12. Verify selected terms: untick generic survivors ("paper", "study", "data", "literature"), and consider unticking "circular economy" itself, which co-occurs with everything and pulls the whole map to the centre. Finish.
 13. Click **Overlay Visualization**; under Scores choose **Avg. pub. year**; via Colors > Set colors range, narrow the range so both ends of the scale are populated (blue is older, yellow is recent). Reduce **Max. lines** if the map is unreadable.
 
 In one line: text data; OpenAlex; request URL; title and abstract fields; ignore labels and copyright statements; binary counting; min. occurrences 50 (or 20 to 30); 60% most relevant terms; overlay by average publication year.
 
-## How to read the map (2020 to 2025 build, 704 terms)
+## How to read the map (2021 to 2025 build, 637 terms)
 
 Node size is the number of documents mentioning the term, a link is co-occurrence in the same title or abstract, distance approximates strength of association, and colour is the cluster (network view) or the average publication year (overlay view).
 
-Three clusters carry the map (plus two fragments of one or two terms):
+Three clusters carry the map (plus a three-term fragment):
 
-- **Engineering and materials** (292 terms, 69,564 occurrences). The largest node of the whole map is *waste* (3,228 documents), followed by *product* (2,474), *production* (2,334), *recycling* (1,293), *environmental impact* (1,011), *energy* (922), *plastic* (542), *life cycle assessment* (406), *food waste* (232). The six strongest links of the map are all inside this cluster (*product-waste* 990, *use-waste* 954, *production-waste* 911).
-- **Management and business** (320 terms, 68,039 occurrences): *company* (1,417), *adoption* (1,169), *barrier* (1,036), *business* (1,021), *stakeholder* (910), *supply chain* (765), *policymaker* (707), *business model* (698), plus the whole digital vocabulary: *digital technology* (251), *artificial intelligence* (211), *digitalization* (171), *iot* (152), *blockchain* (144), *digital transformation* (103). There is no separate digital cluster: digital terms sit with management, and only *machine learning* (71) sits with the engineers.
-- **Policy and economic development** (89 terms, 12,188 occurrences): *enterprise* (523), *european union* (497), *economic development* (277), *competitiveness* (246), *environmental protection* (193), *ukraine* (186). It is the oldest cluster (average year 2022.3 against 2022.8 and 2023.1 for the other two) and the least cited (average normalised citations 0.71, against 1.05 and 1.14).
+- **Engineering and materials** (252 terms, 61,334 occurrences). The largest node of the whole map is *waste* (2,916 documents), followed by *product* (2,208), *production* (2,160), *application* (1,626), *environmental impact* (913), *energy* (792), *plastic* (481), *life cycle assessment* (375), *food waste* (208). The six strongest links of the map are all inside this cluster (*product-waste* 906, *use-waste* 891, *production-waste* 857).
+- **Management and business** (298 terms, 62,865 occurrences): *company* (1,238), *adoption* (1,114), *barrier* (937), *business* (881), *stakeholder* (845), *supply chain* (728), *policymaker* (684), *business model* (617), plus the whole digital vocabulary: *digital technology* (241), *artificial intelligence* (209), *digitalization* (164), *iot* (137), *blockchain* (137), *digital transformation* (98). There is no separate digital cluster: digital terms sit with management, and only *machine learning* (71) sits with the engineers.
+- **Policy and economic development** (84 terms, 13,048 occurrences): *enterprise* (466), *european union* (429), *economic development* (289), *ukraine* (175), *environmental protection* (169), *cooperation* (198). It is the oldest cluster (average year 2022.8 against 2023.2 and 2023.5 for the other two) and the least cited (average normalised citations 0.66, against 1.07 and 1.11).
 
-In the overlay by year, the recent end (average year 2023.8 or later) holds *policymaker*, *circular practice*, *waste reduction*, *artificial intelligence*, *policy framework*, *technological advancement*, *esg* (2024.1); the old end (2021.9 or earlier) holds *business model*, *definition*, *citizen*, *economic activity*, *european commission* (2021.0).
+In the overlay by year, the recent end (average year 2024.0 or later) holds *policy framework* (2024.4), *technological advancement*, *sustainability goal*, *waste reduction*, *sustainable practice*, *circular practice*, *ce adoption*, with *policymaker* and *artificial intelligence* just behind; the old end (2022.6 or earlier) holds *covid* (2022.0), *pandemic*, *european commission*, *definition*, *business model*.
 
-Best-cited terms (average normalised citations, at least 50 occurrences): *bioplastic* 3.0, *dynamic capability* 2.3, *manufacturing firm* 2.1, *additive manufacturing* 2.0; the map average is 1.05.
+Best-cited terms (average normalised citations, at least 50 occurrences): *bioplastic* 3.3, *dynamic capability* 2.3, *manufacturing firm* 2.1, *carbon neutrality* 2.0; the map average is 1.03.
 
 ## Caveats
 
@@ -62,4 +62,4 @@ Best-cited terms (average normalised citations, at least 50 occurrences): *biopl
 
 ## Saved map
 
-[maps/A1_ce_terms_2020_2025.json](maps/A1_ce_terms_2020_2025.json) is the map described above. Download it and open it in VOSviewer (File > Open > VOSviewer JSON file) or in VOSviewer Online (app.vosviewer.com > Open).
+[maps/A1_ce_terms_2021_2025.json](maps/A1_ce_terms_2021_2025.json) is the map described above. Download it and open it in VOSviewer (File > Open > VOSviewer JSON file) or in VOSviewer Online (app.vosviewer.com > Open).
