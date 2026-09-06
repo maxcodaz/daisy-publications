@@ -49,19 +49,11 @@ LIMIT 5;
 -- ---------------------------------------------------------------------------
 CREATE OR REPLACE TABLE `your-project-id.daisy.q03_ce_patcit_pairs` AS
 
--- STEP 1a: CE topic set (same 8 topics as q01/q02).
+-- STEP 1a: CE topic set, read from the table uploaded in q02 STEP 0
+--   (daisy.ce_topics = the handout file ce_topics.csv; same 8 topics as q01).
 WITH green AS (
-  SELECT id
-  FROM UNNEST([
-    'https://openalex.org/T10539',   -- Sustainable Supply Chain Management
-    'https://openalex.org/T11091',   -- Extraction and Separation Processes
-    'https://openalex.org/T13180',   -- Chemistry and Chemical Engineering
-    'https://openalex.org/T11672',   -- Recycling and utilization of industrial and municipal waste in materials production
-    'https://openalex.org/T13240',   -- Bioeconomy and Sustainability Development
-    'https://openalex.org/T12746',   -- Sustainable Industrial Ecology
-    'https://openalex.org/T13045',   -- Industrial Engineering and Technologies
-    'https://openalex.org/T13477'    -- Sustainable Design and Development
-  ]) AS id
+  SELECT topic_id_url AS id
+  FROM `your-project-id.daisy.ce_topics`
 ),
 
 -- STEP 1b: CE articles 2000-2016 with a DOI, the DOI in the bare lower-case
@@ -158,49 +150,3 @@ FROM `your-project-id.daisy.q03_ce_patcit_pairs`
 WHERE publication_number IS NOT NULL                                 -- cited pairs only
 GROUP BY office
 ORDER BY n_citations DESC;
-
-
--- ---------------------------------------------------------------------------
--- (5) LAG DISTRIBUTION (histogram input). Negative lags exist (patent
---     published before the article: preprints, DOCDB date quirks): show
---     them, do not hide them.
--- ---------------------------------------------------------------------------
-SELECT
-  lag_years,                                                         -- patent year minus article year
-  COUNT(*) AS n_citations
-FROM `your-project-id.daisy.q03_ce_patcit_pairs`
-WHERE publication_number IS NOT NULL
-GROUP BY lag_years
-ORDER BY lag_years;
-
-
--- ---------------------------------------------------------------------------
--- (6) SPOT CHECK (commented): five CE papers known to be cited by patents,
---     bare lower-case DOIs. They must return n_patents > 0, else suspect
---     the DOI normalisation.
--- ---------------------------------------------------------------------------
--- SELECT
---   doi_key,
---   publication_year,
---   COUNT(publication_number) AS n_patents
--- FROM `your-project-id.daisy.q03_ce_patcit_pairs`
--- WHERE doi_key IN (
---   '10.xxxx/todo1', '10.xxxx/todo2', '10.xxxx/todo3', '10.xxxx/todo4', '10.xxxx/todo5'
--- )
--- GROUP BY doi_key, publication_year
--- ORDER BY doi_key;
-
-
--- ---------------------------------------------------------------------------
--- (7) OUT OF THE WAREHOUSE. The pairs table doubles as the export demo:
---     * result grid > "Save results": CSV local (~10 MB cap), CSV on
---       Drive (~1 GB), or another BigQuery table; then Stata's
---       import delimited.
---     * bigger tables: EXPORT DATA to a Cloud Storage bucket (the wildcard
---       in the uri is mandatory, exports are sharded; a sandbox has no
---       bucket), or pull straight into Colab / R:
---         Colab:  %%bigquery df --project your-project-id  + the SELECT
---         R:      bigrquery::bq_project_query(), then bq_table_download()
---     * sandbox tables expire after 60 days: export what you want to keep,
---       and name the snapshot in what you export (June 2026 here).
--- ---------------------------------------------------------------------------

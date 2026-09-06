@@ -18,9 +18,22 @@
 --   it. Run the statement below first (the dataset location must match the
 --   source dataset's: console, Details tab of openalex_walden). Then upload
 --   the handout file ce_topics.csv: + Add > Local file > ce_topics.csv,
---   dataset daisy, table name ce_topics, auto-detect schema. Free.
+--   dataset daisy, table name ce_topics. Schema: auto-detect OFF, "Edit as
+--   text", paste  topic_id_url:STRING,topic_name:STRING  ; then Advanced
+--   options > "Header rows to skip" = 1. Free.
+--   Why not auto-detect: both columns are text, so BigQuery cannot tell the
+--   header from a data row; it loads "topic_id_url,topic_name" as row 1 and
+--   names the columns string_field_0 and string_field_1, and the query below
+--   fails with "Unrecognized name: topic_id_url".
 CREATE SCHEMA IF NOT EXISTS `your-project-id.daisy`
 OPTIONS (location = 'US', description = 'DAISY 2026 BigQuery demo');
+
+-- Already uploaded with auto-detect? Repair in place instead of re-uploading
+--   (uncomment and run; drops the header row that came in as data):
+-- CREATE OR REPLACE TABLE `your-project-id.daisy.ce_topics` AS
+-- SELECT string_field_0 AS topic_id_url, string_field_1 AS topic_name
+-- FROM `your-project-id.daisy.ce_topics`
+-- WHERE string_field_0 != 'topic_id_url';
 
 
 -- STEP 1: one row per (article, country). THE JOIN EXPLOSION: the comma

@@ -21,7 +21,7 @@ The 8 OpenAlex topics returned by the topics search for "circular economy" (`htt
 
 | file | what it is | how to use it |
 |---|---|---|
-| `ce_topics.csv` | the 8 topics as a two-column CSV (`topic_id_url`, `topic_name`) | upload it into your BigQuery dataset as `daisy.ce_topics` (`sql/q02_green_by_country.sql`, step 0) |
+| `ce_topics.csv` | the 8 topics as a two-column CSV (`topic_id_url`, `topic_name`) | upload it into your BigQuery dataset as `daisy.ce_topics` (`sql/q02_green_by_country.sql`, step 0); read by `q02` and `q03` |
 | `ce_topic_ids.txt` | the same ids, one bare id per line (`T10539`) | anything that reads a list |
 | `ce_topic_ids_sql.txt` | the same ids as full URLs in a BigQuery array literal | paste into `UNNEST([...])` in SQL (`primary_topic.id` holds the full URL in BigQuery) |
 | `ce_topic_ids_api.txt` | the same bare ids joined by a vertical bar | paste after `primary_topic.id:` in an OpenAlex API filter or a VOSviewer request URL (the API accepts up to 100 OR-ed values in one filter) |
