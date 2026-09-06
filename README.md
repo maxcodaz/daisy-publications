@@ -1,8 +1,8 @@
 # DAISY 2026: publications as innovation data
 
-Materials for the two-hour session on publication data at the **DAISY International Summer School** (Data Analytics for Innovation and SustainabilitY), Taranto, 7 to 11 September 2026, taught by Massimiliano Coda Zabetta. A companion repository from the school is [daisy-networks](https://github.com/ffusillo/daisy-networks) (Fabrizio Fusillo, network analysis).
+Materials for the two-hour session on publication data at the **DAISY International Summer School** (Data Analytics for Innovation and SustainabilitY), Taranto, 7 to 11 September 2026, taught by Massimiliano Coda Zabetta.
 
-The session pairs one hour of theory (why economists use publication data, what OpenAlex is, how green science is measured, how science reaches patents) with one hour of live demonstration built around a single question: **how much circular-economy and green science is there, where, by whom, and does it reach patents?** The same question is answered three times with three tools, moving from no code to SQL:
+The session pairs theory with a live demonstration. The demonstration shows how the scientific literature can be measured as innovation data, its size, geography, topics and links to patents, with three tools, moving from no code to SQL:
 
 | leg | tool | what it shows | folder |
 |---|---|---|---|
@@ -18,9 +18,5 @@ During the session you watch; everything here can be rerun at home afterwards. R
 - [vosviewer/](vosviewer/): click-path sheets for the three maps shown live, six take-home exercises, and the saved maps in [vosviewer/maps/](vosviewer/maps/) (JSON files that open in VOSviewer or in VOSviewer Online at app.vosviewer.com).
 - [notebooks/](notebooks/): the Colab notebooks, one in R (openalexR, the version shown live) and one in Python (pyalex, same cells).
 - [sql/](sql/): the five BigQuery scripts, commented line by line, with bytes-scanned estimates in the headers, plus a Colab notebook that takes a result table to a CSV and to a Cloud Storage bucket.
-- [data/](data/): the green and circular-economy topic lists used across all three legs, with provenance notes.
+- [data/](data/): `ce_topics.csv`, the circular-economy topic list that the SQL scripts read after you upload it into BigQuery.
 - Slides: the PDF is added here after the school.
-
-## Contact
-
-Massimiliano Coda Zabetta. Questions during the school are welcome in person; afterwards, open an issue here.

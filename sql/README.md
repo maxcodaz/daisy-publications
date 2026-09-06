@@ -11,7 +11,7 @@ BigQuery Standard SQL scripts on the full OpenAlex snapshot: how much circular-e
 | `q02_green_by_country.sql` | CE articles 2015 to 2025 by author country, full and fractional counting, top 20, RTA; step 0 creates the `daisy` dataset and reads the CE topic list from the uploaded `ce_topics.csv` | same + your `daisy.ce_topics` |
 | `q03_patcit_green.sql` | CE articles 2000 to 2016 joined to PatCit front-page citations on DOI: share cited by patents and citing patents per cited article, by year and by subfield; citing office with mean and median lag | same + your `daisy.ce_topics` + `patcit-public-data.frontpage.bibliographical_reference` |
 | `q04_export_examples.sql` | reference: materialise a result, Save results, EXPORT DATA, Colab `%%bigquery` and R `bigrquery` snippets, pitfalls | same |
-| `daisy_bigquery_to_bucket.ipynb` | Colab notebook (Python 3, default runtime, nothing to install): reads a table of your `daisy` dataset (the pairs table written by `q03`) into pandas with `%%bigquery`, writes it to CSV with `astype(str)`, copies the CSV to a Cloud Storage bucket with `gsutil`, every line commented; the bucket step needs billing, sandbox users stop at the CSV or use the Google Drive alternative at the end | your `daisy.q03_ce_patcit_pairs` |
+| `daisy_bigquery_to_bucket.ipynb` | Colab notebook (Python 3, default runtime, nothing to install): reads a table of your `daisy` dataset (the pairs table written by `q03`) into pandas with `%%bigquery`, writes it to CSV with `astype(str)`, copies the CSV to a Cloud Storage bucket with `gsutil`, every line commented; the bucket step needs billing, sandbox users stop at the CSV | your `daisy.q03_ce_patcit_pairs` |
 
 The CE topic set is the 8 topics returned by the OpenAlex topics search for "circular economy" (`api.openalex.org/topics?search=circular%20economy`); the list with names is in `../data/ce_topics.csv`. It enters the scripts in two ways, on purpose: `q01` inlines it as a `WITH green AS (SELECT id FROM UNNEST([...]))` block so it runs before anything is uploaded, while `q02` and `q03` read it from `daisy.ce_topics`, a table you create by uploading `ce_topics.csv` into your own dataset (`q02` step 0).
 
@@ -34,9 +34,3 @@ Dataset locations: BigQuery cannot join or copy across regions. Check the "Data 
 - Free: the dry-run estimate, the table Preview tab, `INFORMATION_SCHEMA` and `__TABLES__`, cached results.
 - Not free: `LIMIT n` (full columns are still read), `SELECT *`, any query with a changed character (no cache).
 - BigQuery is columnar: cost depends on the leaves you read, not on the number of rows returned. `authorships.countries` is much cheaper than `authorships`.
-
-## References used in the headers
-
-- Verluise, C., Cristelli, G., Higham, K. & de Rassenfosse, G. (2026). Beyond the front page: in-text citations to patents as traces of inventor knowledge. Strategic Management Journal 47(3), 678-698. doi:10.1002/smj.70027. PatCit dataset: Zenodo doi:10.5281/zenodo.4391095 (v0.3.1), concept doi:10.5281/zenodo.3710993, CC BY 4.0.
-- Marx, M. & Fuegi, A. (2020). Reliance on science: worldwide front-page patent citations to scientific articles. Strategic Management Journal 41(9), 1572-1594. doi:10.1002/smj.3145.
-- OpenAlex works schema as loaded by SUB Goettingen: github.com/naustica/openalex (schemas/schema_openalex_work.json). PatCit schema: github.com/cverluise/PatCit (schema/frontpage_bibref.json).
