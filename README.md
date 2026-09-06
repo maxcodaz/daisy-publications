@@ -2,7 +2,7 @@
 
 Materials for the two-hour session on publication data at the **DAISY International Summer School** (Data Analytics for Innovation and SustainabilitY), Taranto, 7 to 11 September 2026, taught by Massimiliano Coda Zabetta.
 
-The session pairs theory with a live demonstration. The demonstration shows how the scientific literature can be measured as innovation data, its size, geography, topics and links to patents, with three tools, moving from no code to SQL:
+The session pairs theory with a live demonstration. The demonstration shows how the scientific literature can be measured as innovation data, its size, geography, topics and links to patents, with three tools:
 
 | leg | tool | what it shows | folder |
 |---|---|---|---|
@@ -10,7 +10,7 @@ The session pairs theory with a live demonstration. The demonstration shows how 
 | B | OpenAlex API from a Colab notebook (openalexR, with a pyalex twin) | publication trends, geography, the SDG landscape | [notebooks/](notebooks/) |
 | C | BigQuery on the full OpenAlex snapshot, joined to PatCit | the same numbers on the full population, plus the science-to-technology bridge | [sql/](sql/) |
 
-During the session you watch; everything here can be rerun at home afterwards. Reproducing the demo takes about ten minutes of setup (OpenAlex API key, VOSviewer, a free BigQuery sandbox, Colab): see [SETUP.md](SETUP.md).
+Everything here can be rerun at home after the session. Reproducing the demo takes about ten minutes of setup (OpenAlex API key, VOSviewer, a free BigQuery sandbox, Colab): see [SETUP.md](SETUP.md).
 
 ## Contents
 
