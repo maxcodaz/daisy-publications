@@ -1,6 +1,6 @@
 # Before the session "Publications as innovation data" (DAISY 2026): a 10-minute setup
 
-Dear participants, if you want to run the material on your laptop during or after the session, please do these four things in advance. It takes about ten minutes and no payment details are asked anywhere. What the session covers is explained in class.
+Dear participants, if you want to run the material on your laptop during or after the session, please do these four things in advance. It takes about ten minutes. What the session covers is explained in class.
 
 **What to bring**: a laptop with a charger, the Google account you use below, and your OpenAlex API key saved somewhere you can copy it from.
 
@@ -56,4 +56,4 @@ Nothing is lost: the session is a live demonstration and everything can be set u
 - If your **institutional Google account** refuses to open the Cloud console or Colab ("this service is not available for your organisation" or a permission error), the administrator has switched Cloud services off for that domain: use a personal Gmail account instead.
 - If Java refuses to start VOSviewer on macOS, download the JAR and run `java -jar VOSviewer.jar` in a terminal.
 
-Bring your questions to the session.
+If something does not work, write me an email before the session.
