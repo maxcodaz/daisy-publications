@@ -1,6 +1,6 @@
 # OpenAlex API from Colab
 
-Two notebooks with the same four blocks (B0 anatomy of a work record and cost, B1 trend, B2 geography and RTA, B3 SDG landscape and priorities), one in R and one in Python: same calls, same numbers. Nothing is loaded from disk; every number comes from live API calls (about 320 per run, almost all of them the two uncapped institution downloads of B2, which take a few minutes).
+Two notebooks with the same four blocks (B0 anatomy of a work record and cost, B1 trend, B2 geography and RCA, B3 SDG landscape and priorities), one in R and one in Python: same calls, same numbers. Nothing is loaded from disk; every number comes from live API calls (about 320 per run, almost all of them the two uncapped institution downloads of B2, which take a few minutes).
 
 | File | Language | Colab runtime | Package | Outputs stored |
 |---|---|---|---|---|

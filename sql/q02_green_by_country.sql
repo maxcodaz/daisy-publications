@@ -1,7 +1,7 @@
 -- ============================================================================
 -- q02_green_by_country.sql  (DAISY 2026 BigQuery demo: geography)
 -- Which countries produce CE science and which specialise in it: full and
--- fractional counting, shares, RTA = (country CE share) / (world CE share).
+-- fractional counting, shares, RCA = (country CE share) / (world CE share).
 -- Top 20 by CE count; Italy is inside (adapting the script to a country
 -- outside the top 20 means raising the LIMIT or adding a WHERE).
 -- Tables: subugoe-collaborative.openalex_walden.works, plus the CE topic
@@ -87,15 +87,15 @@ by_country AS (
 --   of pairs, where a three-country article sits three times, so the
 --   COUNT(DISTINCT ...) is load-bearing. Do not simplify it to COUNT(*).
 --   Fractional weights sum to 1 per article, so one denominator works for
---   both RTA versions.
+--   both RCA versions.
 world AS (
   SELECT
     COUNT(DISTINCT IF(is_ce, id, NULL)) / COUNT(DISTINCT id) AS world_share_ce
   FROM pairs
 )
 
--- STEP 5: the 20 largest CE producers, shares and RTA under both counting
---   rules. RTA > 1: more specialised in CE than the world. The console's
+-- STEP 5: the 20 largest CE producers, shares and RCA under both counting
+--   rules. RCA > 1: more specialised in CE than the world. The console's
 --   Row column is the rank (output sorted by ce_full).
 SELECT
   b.country,                                                         -- ISO-2 code
@@ -106,8 +106,8 @@ SELECT
   ROUND(100 * b.ce_full / b.all_full, 3)               AS pct_ce_full,    -- country CE share, full
   ROUND(100 * b.ce_frac / b.all_frac, 3)               AS pct_ce_frac,    -- country CE share, fractional
   ROUND(100 * w.world_share_ce, 3)                     AS pct_ce_world,   -- world CE share
-  ROUND((b.ce_full / b.all_full) / w.world_share_ce, 3)   AS rta_full,    -- RTA, full counting
-  ROUND((b.ce_frac / b.all_frac)  / w.world_share_ce, 3)  AS rta_frac     -- RTA, fractional
+  ROUND((b.ce_full / b.all_full) / w.world_share_ce, 3)   AS rca_full,    -- RCA, full counting
+  ROUND((b.ce_frac / b.all_frac)  / w.world_share_ce, 3)  AS rca_frac     -- RCA, fractional
 FROM by_country AS b
 CROSS JOIN world AS w                                                -- one-row table, attach to every country
 ORDER BY b.ce_full DESC
