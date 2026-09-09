@@ -19,7 +19,7 @@ Everything here can be rerun at home after the session. Reproducing the demo tak
 - [notebooks/](notebooks/): the Colab notebooks, one in R (openalexR, the version shown live) and one in Python (pyalex, same cells).
 - [sql/](sql/): the five BigQuery scripts, commented line by line, with bytes-scanned estimates in the headers, plus a Colab notebook that takes a result table to a CSV and to a Cloud Storage bucket.
 - [data/](data/): `ce_topics.csv`, the circular-economy topic list that the SQL scripts read after you upload it into BigQuery.
-- Slides: the PDF is added here after the school.
+- [slides/](slides/): the session slides, [daisy_publications_slides.pdf](slides/daisy_publications_slides.pdf).
 
 ## Questions
 
